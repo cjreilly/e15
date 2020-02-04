@@ -1,2 +1,2 @@
-# Practice Application
-# e15-spring20 Course work
+# e15
+Course work for CSCI E-15
