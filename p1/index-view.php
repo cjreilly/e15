@@ -8,6 +8,10 @@
 
 <body>
     <h1>e15 Project 1</h1>
+
+    <p><?php echo $result1; ?></p>
+    <p><?php echo $result2; ?></p>
+
 </body>
 
 </html>
