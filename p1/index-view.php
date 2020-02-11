@@ -9,8 +9,19 @@
 <body>
     <h1>e15 Project 1</h1>
 
-    <p><?php echo $result1; ?></p>
-    <p><?php echo $result2; ?></p>
+    <form method='POST' action='process.php'>
+        <label for='inputString'>Enter a string:</label>
+        <input type='text' id='inputString' name='inputString'>
+        <button type='submit'>Process</button>
+    </form>
+
+    <?php if (isset($results)) : ?>
+    <h2>Is big word?</h2>
+    <?=$isBigWord ?>
+
+    <h2>Is palindrome?</h2>
+    <?=$isPalindrome ?>
+    <?php endif ?>
 
 </body>
 

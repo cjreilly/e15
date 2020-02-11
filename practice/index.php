@@ -15,6 +15,13 @@ $dimes = 100;
 $quarters = 34;
 
 # Add up how much money is in the piggy bank
-$total = ($pennies * $penny_value) + ($nickels * $nickel_value) + ($dimes * $dime_value) + ($quarters * $quarter_value);
+$total = ($pennies * $penny_value) 
+    + ($nickels * $nickel_value) 
+    + ($dimes * $dime_value) 
+    + ($quarters * $quarter_value);
 
 require 'index-view.php';
+
+# Closing PHP tag purposefully omitted
+
+

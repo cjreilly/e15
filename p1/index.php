@@ -10,21 +10,16 @@ session_start();
 require 'controller/index-controller.php';
 
 
-function isPalindrome($inputString)
-{
+session_start();
+
+$results = null;
+
+if (isset($_SESSION['results'])) {
+    $results = $_SESSION['results'];
+
+    extract($results);
+
+    $_SESSION['results'] = null;
 }
-
-function isBigWord($inputString)
-{
-    if (strlen($inputString) > 7) {
-        return 'Yes';
-    } else {
-        return 'No';
-    }
-}
-
-$result1 = isBigWord('cat');
-$result2 = isBigWord('mississippi');
-
 
 # require 'index-view.php';
