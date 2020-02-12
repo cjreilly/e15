@@ -1,0 +1,82 @@
+.title {
+  color:#111;
+  text-transform:capitalize
+}
+
+.title {
+  text-align:center;
+}
+
+h2.title {
+  color: #777;
+}
+
+p.primary {
+  text-transform:uppercase;
+  text-align:center;
+}
+
+hr.break {
+  overflow:visible;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  width: 10em;
+  font-family:sans-serif;
+}
+hr.invisible {
+  overflow:visible;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  width: 10em;
+  font-family:sans-serif;
+  border:0;
+}
+
+input.primary {
+}
+
+.aligned {
+  display:inline-block;
+  text-align:center;
+  width:10em;
+}
+
+div.container {
+  text-align:center;
+}
+
+@keyframes negative-result {
+  0% {background-color: #FFF;}
+  20% {background-color: #F55;}
+  50% {background-color: #FAA;}
+  100% {background-color: auto;}
+}
+.negative-result {
+  animation-name: negative-result;
+  -webkit-animation-name: negative-result;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+}
+@keyframes positive-result {
+  0% {background-color: $FFF;}
+  20% {background-color: $3F3;}
+  50% {background-color:#AFA;}
+  100% {background-color: auto;}
+}
+.positive-result {
+  animation-name: positive-result;
+  -webkit-animation-name: positive-result;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+}
+
+input.read {
+  border-bottom:1px solid;
+  border-top:0;
+  border-left:0;
+  border-right:0;
+  overflow:scroll;
+  min-width:16em;
+  text-align:center;
+}
+
