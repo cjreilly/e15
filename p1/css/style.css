@@ -11,7 +11,7 @@ h2.title {
   color: #777;
 }
 
-p.primary {
+.primary {
   text-transform:uppercase;
   text-align:center;
 }
@@ -41,7 +41,7 @@ input.primary {
   width:10em;
 }
 
-div.container {
+.container {
   text-align:center;
 }
 
@@ -80,3 +80,60 @@ input.read {
   text-align:center;
 }
 
+footer
+{
+  text-align:center;
+  font-size: 75%;
+}
+
+fieldset
+{
+  border:0;
+}
+label
+{
+  font-size: 85%;
+}
+.inline
+{
+  display:inline-block;
+}
+
+.contracted.expando
+{
+  overflow:hidden;
+  vertical-align:bottom;
+}
+.contracted.expando:before
+{
+  content:"+";
+  min-height:2em;
+  min-width:2em;
+}
+.contracted.expando *
+{
+  display:none;
+}
+
+.expanded.expando
+{
+  overflow:auto;
+  vertical-align:bottom;
+}
+.expanded.expando:before
+{
+  display:none;
+}
+.expanded.expando *
+{
+}
+.expando:hover
+{
+  color:#0033FF;
+  cursor:pointer;
+  text-decoration:underline;
+}
+.expando>label:hover
+{
+  cursor:pointer;
+}
