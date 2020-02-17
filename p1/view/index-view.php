@@ -9,8 +9,8 @@ require "view/parts/expando-part.php";
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-  <link rel="stylesheet" href="css/style.css"></style>
-  <script type="text/javascript" src="view/index-script.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="view/index-script.js"></script>
 
   <title><?php echo $DOCUMENT_TITLE; ?></title>
   <meta charset='utf-8'>
@@ -21,7 +21,7 @@ require "view/parts/expando-part.php";
   <?php
   require "view/header-view.php";
   ?>
-  <hr class="break"></hr>
+  <hr class="break">
   <?php
   require "view/string-form-view.php";
   if (isset($RESULT)) {

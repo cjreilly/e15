@@ -8,7 +8,7 @@ if (isset($RESULT['salt'])) {
   $expandoSaltField['initialValue'] = $RESULT['salt'];
 }
 ?>
-  <form action="process/process-string-form.php" method="post" name="ProcessString" id="ProcessString" value="1">
+  <form action="process/process-string-form.php" method="post" name="ProcessString" id="ProcessString">
   <p class="primary">
     Enter a string
   </p>
@@ -16,9 +16,9 @@ if (isset($RESULT['salt'])) {
       <?php
         echo '<div class="inline container">';
         if (isset($RESULT['text'])) {
-          echo '<input name="InputText" type="text" class="primary" value="'.$RESULT['text'].'"/>';
+          echo '<input name="InputText" id="InputText" type="text" class="primary" value="'.$RESULT['text'].'"/>';
         } else {
-          echo '<input name="InputText" type="text" class="primary" value=""/>';
+          echo '<input name="InputText" id="InputText" type="text" class="primary" value=""/>';
         }
         echo '<br/>';
         echo '<label for="InputText">Text</label>';
@@ -27,7 +27,7 @@ if (isset($RESULT['salt'])) {
         printExpandoPart($expandoSaltField);
 
         echo '<div class="inline container">';
-        echo '<button name="Process" class="primary" type="submit" formenctype="multipart/formdata">process</button>';
+        echo '<button name="Process" id="Process" class="primary" type="submit">process</button>';
         echo '<br/>';
         echo '<label for="Process">&nbsp;</label>';
         echo '</div>';

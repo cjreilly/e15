@@ -19,7 +19,7 @@ function printExpandoPart($part)
   #}
   $expanded = $part['expanded'] == TRUE ? 'expanded' : 'contracted';
   echo '<div class="inline expando container '.$expanded.'" onclick="toggleExpando(this);">';
-  echo '<input name="'.$part['name'].'" type="text" class="primary" value="'.$part['initialValue'].'" onclick="event.cancelBubble=true;"/>';
+  echo '<input name="'.$part['name'].'" id="'.$part['name'].'" type="text" class="primary" value="'.$part['initialValue'].'" onclick="event.cancelBubble=true;"/>';
   echo '<br/>';
   echo '<label for="'.$part['name'].'">'.$part['label'].'</label>';
   echo '</div>';
