@@ -1,3 +1,3 @@
-# Bookmark - practice application for e15
-+ By: Christopher Reilly
-+ Production URL: <http://bookmark.christopherreilly.me>
+# Bookmark - Practice application for e15
++ By: Susan Buck
++ Production URL: <http://bookmark.hesweb.xyz>

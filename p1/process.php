@@ -1,29 +1,25 @@
 <?php
 
+require 'StringProcessor.php';
+
 session_start();
 
+# Extract data from the form submission
 $inputString = $_POST['inputString'];
 
-function isPalindrome($inputString)
-{
-    return 'Yes';
-}
+# Instantiate a new object of our StringProcessor class
+$stringProcessor = new StringProcessor($inputString);
 
-function isBigWord($inputString)
-{
-    if (strlen($inputString) > 7) {
-        return 'Yes';
-    } else {
-        return 'No';
-    }
-}
-
+# Store all our results in one array in the session
 $_SESSION['results'] = [
-    'isBigWord' => isBigWord($inputString),
-    'isPalindrome' => isPalindrome($inputString)
+    'isBigWord' => $stringProcessor->isBigWord(),
+    'isPalindrome' => $stringProcessor->isPalindrome()
 ];
 
-header('Location: index.php');
-
+# Alternatively, we could store individual values in the session,
+# but this is more verbose than the above solution
 //$_SESSION['isBigWordResult'] = $isBigWordResult;
 //$_SESSION['isPalindrome'] = $isPalindrome;
+
+# Redirect back to the index page
+header('Location: index.php');
