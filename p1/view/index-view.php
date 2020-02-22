@@ -5,29 +5,25 @@
 #
 
 require "view/parts/expando-part.php";
-?>
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="view/index-script.js"></script>
 
-  <title><?php echo $DOCUMENT_TITLE; ?></title>
-  <meta charset='utf-8'>
+echo '<!DOCTYPE html>';
+echo '<html lang="en">';
+echo '<head>';
+echo '<link rel="stylesheet" href="css/style.css">';
+echo '<script src="view/index-script.js"></script>';
 
-</head>
+echo '<title>'.$DOCUMENT_TITLE.'</title>';
+echo '<meta charset="utf-8">';
 
-<body>
-  <?php
-  require "view/header-view.php";
-  ?>
-  <hr class="break">
-  <?php
-  require "view/string-form-view.php";
-  if (isset($RESULT)) {
+echo '</head>';
+
+echo '<body>';
+require "view/header-view.php";
+echo '<hr class="break">';
+require "view/string-form-view.php";
+if (isset($RESULT)) {
     require "view/result-view.php";
-  }
-  ?>
-  <?php require "footer-view.php"; ?>
-</body>
-</html>
+}
+require "footer-view.php";
+echo '</body>';
+echo '</html>';

@@ -15,4 +15,3 @@ $DOCUMENT_TITLE=$INDEX_TITLE . " - " . $INDEX_SUBTITLE;
 $RESULT = $_SESSION['result'];
 
 require 'view/index-view.php';
-?>
