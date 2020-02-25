@@ -235,7 +235,6 @@ class BookController extends Controller
      * Example demonstrating multiple parameters
      * Not a feature we're actually building, so I'm commenting out
      */
-    /*
     public function filter($category, $subcategory = null)
     {
         $output = 'Here are all the books under the category '.$category;
@@ -246,5 +245,4 @@ class BookController extends Controller
 
         return $output;
     }
-    */
 }

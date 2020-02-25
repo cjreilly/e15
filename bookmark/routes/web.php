@@ -30,7 +30,7 @@ Route::post('/books/{slug}/remove', 'BookController@remove');
 Route::get('/books', 'BookController@index');
 
 # Show a book
-Route::get('/books/{slug?}', 'BookController@show');
+Route::get('/books/{title?}', 'BookController@show');
 
 # Misc
 Route::get('/search', 'BookController@search');
@@ -38,7 +38,7 @@ Route::get('/list', 'BookController@list');
 
 # This was an example route to show multiple parameters;
 # Not a feature we're actually building, so I'm commenting out
-# Route::get('/filter/{category}/{subcategory?}', 'BookController@filter');
+Route::get('/filter/{category}/{subcategory?}', 'BookController@filter');
 
 Route::get('/debug', function() {
     $debug = [
@@ -55,3 +55,4 @@ Route::get('/debug', function() {
 
     dump($debug);
 });
+
