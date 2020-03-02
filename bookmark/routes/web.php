@@ -1,5 +1,10 @@
 <?php
 
+Route::get('/example', function () {
+    return view('abc');
+});
+
+
 Route::get('/', 'PageController@welcome');
 
 Route::get('/books', 'BookController@index');
