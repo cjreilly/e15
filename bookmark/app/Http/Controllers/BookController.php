@@ -11,7 +11,10 @@ class BookController extends Controller
      */
     public function index()
     {
-        return 'Here are all the books...';
+        return view('books.index')->with(['books' => [
+            ['title' => 'War and Peace'],
+            ['title' => 'The Great Gatsby']
+        ]]);
     }
 
     /**
@@ -22,7 +25,11 @@ class BookController extends Controller
         # Query the database for a book where the title = $title
         # Return a view to show the book
         # Include the book data
-        return 'Here are the details for the book: '.$title;
+        //return 'Here are the details for the book: ' . $title;
+
+        $bookFound = true;
+        
+        return view('books.show')->with(['title' => $title, 'bookFound' => $bookFound]);
     }
 
     /**
