@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/example2', function () {
+    dump(Arr::sort(['a', 'z', 'g']));
+});
+
 # Example route used to demonstrate error pages
 Route::get('/example', function () {
     $foo = [1,2,3];
@@ -23,8 +27,15 @@ Route::get('/support', 'PageController@support');
 
 
 # Books
+Route::get('/books/create', 'BookController@create');
+Route::post('/books', 'BookController@store');
+
 Route::get('/books', 'BookController@index');
 Route::get('/books/{slug?}', 'BookController@show');
+
+Route::get('/search', 'BookController@search');
+
+Route::get('/list', 'BookController@list');
 
 # This was an example route to show multiple parameters;
 # Not a feature we're actually building, so I'm commenting out
