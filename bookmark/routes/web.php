@@ -12,13 +12,20 @@ Route::get('/example', function () {
 
     Log::info($foo);
 
+    ddd(storage_path('temp'));
+
     return view('abc');
 });
 
-# Homepage
+# Misc. Pages
 Route::get('/', 'PageController@welcome');
+Route::get('/support', 'PageController@support');
+
 
 # Books
 Route::get('/books', 'BookController@index');
-Route::get('/books/{title?}', 'BookController@show');
-Route::get('/filter/{category}/{subcategory?}', 'BookController@filter');
+Route::get('/books/{slug?}', 'BookController@show');
+
+# This was an example route to show multiple parameters;
+# Not a feature we're actually building, so I'm commenting out
+# Route::get('/filter/{category}/{subcategory?}', 'BookController@filter');
