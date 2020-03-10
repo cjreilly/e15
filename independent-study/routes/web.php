@@ -11,18 +11,6 @@
 |
 */
 
-Route::get('/example', function() {
-    return 'hello there!';
-});
-
-
-Route::get('/books', 'BookController@index');
-Route::get('/books/{title}', 'BookController@show');
-
-Route::get('/filter/{category}/{subcategory}', function($category, $subcategory) {
-    return 'Here are all the books in the category ' . $category . ' and ' . $subcategory;
-});
-
 Route::get('/', function () {
     return view('welcome');
 });
