@@ -12,5 +12,6 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $title = 'Comments and Suggestions';
+    return view('layouts.form')->with(['title' => $title]);
 });

@@ -1,0 +1,16 @@
+* {
+* font-family: Helvetica;
+}
+img.icon {
+  max-width:2em;
+}
+a {
+  color:#337700;
+  text-decoration: none;
+}
+a:hover {
+  color:#44AA00;
+}
+.large-font {
+  font-size:150%;
+}
