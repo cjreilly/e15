@@ -184,3 +184,14 @@ label.standard:after
 {
   cursor:pointer;
 }
+
+ul.form-error-summary
+{
+  border:#F66 3px solid;
+  background:#FAA;
+}
+ul.form-error-summary>li
+{
+  text-decoration:underline;
+  list-style-type:none;
+}

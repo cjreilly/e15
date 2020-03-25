@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    $title = 'Comments and Suggestions';
-    return view('layouts.form')->with(['title' => $title]);
-});
+Route::get('/', 'CommentController@initialView');
+Route::post('/', 'CommentController@initialView');
+Route::post('/comment', 'CommentController@acceptComment');
+Route::get('/comment', 'CommentController@initialView');

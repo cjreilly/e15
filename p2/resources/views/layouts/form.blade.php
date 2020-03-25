@@ -5,44 +5,42 @@
 ?>
 @extends('layouts.master')
 
-@section('title')
-{{ $title }}
-@endsection
-
-@section('head')
-<link href='/css/olspring.css' type='text/css' rel='stylesheet'>
-<link href='/css/style.css' type='text/css' rel='stylesheet'>
-@endsection
-
-@section('header')
-<span class="header container">
-  <a class="large-font left-float" href='/'><img class="icon"
-    src='/images/spring.png' id='logo' alt='§'></a>
-  <span class="container">Leave your comments at the ole' spring.</span>
-</span>
-@endsection
-
 @section('content')
 <h1 class="title">{{ $title }}</h1>
-<p class="container">Drop a hint. We'll respond as soon as we can!</p>
-<form>
+<p class="container">Drop a hint. I'll respond as soon as I can!</p>
+<form method="post" action="/comment">
+  {{ csrf_field() }}
   <fieldset class="container">
+    @if(count($errors) > 0)
+      <ul class="form-error-summary">
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    @endif
     <span class="line">
-      <textarea id="hint" class="standard" cols="100" rows="10" autofocus required
-        placeholder="Write your comment here."></textarea>
+      <textarea name="hint" id="hint" class="standard" cols="100" rows="10"
+                autofocus placeholder="Write your comment here."
+                >{{ old("hint") }}</textarea>
     </span>
     <span class="line">
       <label for="telephone-number" class="standard">Phone Number</label>
-      <input id="telephone-number" type="tel" class="standard"
-        placeholder="xxx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></input>
+      <input name="telephone-number" id="telephone-number" type="text"
+        class="standard" value='{{ old("telephone-number") }}'
+        placeholder="xxx-xxx-xxxx"></input>
     </span>
     <span class="line">
       <label for="email-address" class="standard">Email Address</label>
-      <input id="email-address" type="email" class="standard" placeholder="email@mailserver.com"/>
+      <input name="email-address" id="email-address" type="text"
+              class="standard" value='{{ old("email-address") }}'
+              placeholder="email@mailserver.com"/>
     </span>
     <span class="line">
-      <label for="form-rating" class="standard">Rate your satsifaction with this form</label>
-      <input id="form-rating" type="range" class="standard" min="0" max="100" value="80"></input>
+      <label for="form-rating" class="standard">
+        Rate your satsifaction with this form
+      </label>
+      <input name="form-rating" id="form-rating" type="range" class="standard"
+              min="0" max="100" value='{{ old("form-rating") }}'></input>
     <span class="line">
       <input type="submit" value="Submit"></input>
     </span>
@@ -53,7 +51,3 @@
 </p>
 @endsection
 
-@section('footer')
-<hr class="break"/>
-&copy; {{ date('Y') }}
-@endsection
