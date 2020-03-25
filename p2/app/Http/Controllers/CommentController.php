@@ -18,14 +18,16 @@ class CommentController extends Controller
         $title = 'Comments and Suggestions';
         $validator = Validator::make($request->all(), [
           'hint' => 'required',
-          'telephone-number' => 'nullable|regex:/^[1-9][0-9]{2}-[0-9]{3}-[0-9]{4}/i|',
+          'telephone-number' =>
+              'nullable|regex:/^[1-9][0-9]{2}-[0-9]{3}-[0-9]{4}/i|',
           'email-address' => 'nullable|email',
           'form-rating' => 'required'
         ]);
         if ($validator->fails()) {
             return redirect('/')->withErrors($validator)->withInput();
         }
-        return view('layouts.accepted')->with(['title' => $title]);
+        return view('layouts.accepted')->with(['title' => $title,
+            'request' => $request->all()]);
     }
 
     public function completeComment()
