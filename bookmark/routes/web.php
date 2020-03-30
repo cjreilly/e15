@@ -1,9 +1,37 @@
 <?php
 
-Route::get('/example2', function () {
-    dump(Arr::sort(['a', 'z', 'g']));
+/**
+ * Practice
+ */
+Route::any('/practice/{n?}', 'PracticeController@index');
+
+
+
+# Example route used to demonstrate error pages
+Route::get('/example', function () {
+    //dump(config('mail.supportEmail'));
+
+    // $foo = [1,2,3];
+
+    // # dump, die
+    // //dd($foo);
+
+    // # dump, die, debug
+    // //ddd($foo);
+
+    // Log::info($foo);
+
+    // ddd(storage_path('temp'));
+
+    return view('abc');
 });
 
+
+/**
+* Debugging route to test database connection
+* We will delete after we confirm both our local and production database
+* connections are functioning correctly
+*/
 Route::get('/debug', function () {
     $debug = [
         'Environment' => App::environment(),
@@ -30,31 +58,17 @@ Route::get('/debug', function () {
 });
 
 
-# Example route used to demonstrate error pages
-Route::get('/example', function () {
-    //dump(config('mail.supportEmail'));
 
-    // $foo = [1,2,3];
-
-    // # dump, die
-    // //dd($foo);
-
-    // # dump, die, debug
-    // //ddd($foo);
-
-    // Log::info($foo);
-
-    // ddd(storage_path('temp'));
-
-    return view('abc');
-});
-
-# Misc. Pages
+/**
+ * Miscellaneous mostly-static pages
+ */
 Route::get('/', 'PageController@welcome');
 Route::get('/support', 'PageController@support');
 
 
-# Books
+/**
+ * Books
+ */
 Route::get('/books/create', 'BookController@create');
 Route::post('/books', 'BookController@store');
 
