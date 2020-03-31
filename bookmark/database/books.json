@@ -44,11 +44,11 @@
         ],
         "description": "I Know Why the Caged Bird Sings is a 1969 autobiography describing the early years of American writer and poet Maya Angelou. The first in a seven-volume series, it is a coming-of-age story that illustrates how strength of character and a love of literature can help overcome racism and trauma. The book begins when three-year-old Maya and her older brother are sent to Stamps, Arkansas, to live with their grandmother and ends when Maya becomes a mother at the age of 16. In the course of Caged Bird, Maya transforms from a victim of racism with an inferiority complex into a self-possessed, dignified young woman capable of responding to prejudice."
     },
-    "harry-pottern-and-the-philosophers-stone": {
+    "harry-potter-and-the-philosophers-stone": {
         "title": "Harry Potter and the Philosopher’s Stone",
         "author": "J.K. Rowling",
         "published_year": 1997,
-        "cover_url": "https://hes-bookmark.s3.amazonaws.com/harry-pottern-and-the-philosophers-stone.jpg",
+        "cover_url": "https://hes-bookmark.s3.amazonaws.com/harry-potter-and-the-philosophers-stone.jpg",
         "info_url": "https://en.wikipedia.org/wiki/Harry_Potter_and_the_Philosopher%27s_Stone",
         "purchase_url": "https://www.barnesandnoble.com/w/harry-potter-and-the-sorcerers-stone-j-k-rowling/1100036321?ean=9780590353427",
         "tags": [

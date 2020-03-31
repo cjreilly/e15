@@ -5,8 +5,6 @@
  */
 Route::any('/practice/{n?}', 'PracticeController@index');
 
-
-
 # Example route used to demonstrate error pages
 Route::get('/example', function () {
     //dump(config('mail.supportEmail'));
