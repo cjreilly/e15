@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'NoteController@home');
+Route::get('/{id}', 'NoteController@filterSection');

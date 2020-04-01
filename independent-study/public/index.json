@@ -1,0 +1,27 @@
+{
+  "section": {
+    "industry-classification": {
+      "title": "Industry Classification",
+      "section": {
+        "industry": {
+          "title": "Industry"
+        },
+        "civil": {
+          "title": "Civil"
+        },
+        "home": {
+          "title": "Home"
+        }
+      }
+    },
+    "basic-networking": {
+      "title": "Basic Networking"
+    },
+    "iot-protocols": {
+      "title": "IoT Protocols"
+    },
+    "interoperability": {
+      "title": "Interoperability"
+    }
+  }
+}
