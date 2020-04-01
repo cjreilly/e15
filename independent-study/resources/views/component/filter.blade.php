@@ -1,1 +1,1 @@
-<strong><a href="{{ $id }}">◥</a></strong>
+<strong><a href="/{{ $id }}">◥</a></strong>

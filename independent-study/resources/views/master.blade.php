@@ -7,20 +7,21 @@ $sections=["industry-classification","basic-networking","iot-protocols","interop
 
 @section('pinbar')
 <?php
-$pins = null;
+$pins = session('pin');
 ?>
 @if($pins != null)
-  <ul class="navbar">
+  <ul class="pinbar">
   @foreach ($pins as $P => $PData)
     <li>
-    <a href="<?php echo $PData['uri'] ?>">$PData['title']</a>
+    <a href="/{{ $PData['route'] }}">{{ $PData['title'] }}</a>
   @endforeach
   </ul>
 @endif
 @endsection
 
 @section('navbar')
-@component('home')@endcomponent
+@component('component.home')@endcomponent
+@component('component.clearsession')@endcomponent
 <?php
 $index = json_decode(file_get_contents('./index.json'), TRUE);
 ?>
@@ -28,7 +29,7 @@ $index = json_decode(file_get_contents('./index.json'), TRUE);
   <ol class="navbar">
   @foreach ($index['section'] as $S => $SData)
     <li>
-    <a href="#<?php echo $S; ?>">
+    <a href="/#<?php echo $S; ?>">
       <?php echo $SData['title']; ?>
       @component('component.filter',['id'=>$S])@endcomponent
     </a>
@@ -36,7 +37,7 @@ $index = json_decode(file_get_contents('./index.json'), TRUE);
       <ul>
       @foreach ($SData['section'] as $SubS => $SubSData)
         <li>
-        <a href="#<?php echo $S.".".$SubS; ?>">
+        <a href="/#<?php echo $S.".".$SubS; ?>">
           <?php echo $SubSData['title']; ?>
         </a>
       @endforeach

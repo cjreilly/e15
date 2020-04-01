@@ -13,6 +13,9 @@ Links reference specific sections on the page. If the section is not visible the
 
 The web application builds the index from a JSON database.
 
+The web user can pin sections with the pin character. Pins are links to places within the site that stick to the current
+session and page context. The web user can clear pins with the clear character.
+
 ## Outside resources
 + Regular Expression Reference and Testing <https://regexr.com>
 + Laravel Documentation <https://laravel.com/docs>

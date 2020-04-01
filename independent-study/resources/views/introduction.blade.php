@@ -21,7 +21,9 @@
 @endsection
 
 @section('Industry Classification')
-<h1 id="industry-classification" class="title">Industry Classification
+<h1 id="industry-classification" class="title">
+@component('component.pin',['id'=>'industry-classification'])@endcomponent
+Industry Classification
 @component('component.filter',['id'=>'industry-classification'])@endcomponent</h1>
 <h2 class="subtitle">Classification is important to provide business purpose and assign responsibility.</h2>
 <p>Three primary IoT drivers: industry, civil and home.
@@ -65,9 +67,10 @@ visibility.</p>
 <h4>Other Industries</h4>
 <p class="definition"><span>Farm services and <i>tractor as a service</i></span> global initiatives to enhance food
 productivity stimulates development in farming technology. Solutions use a control-and-monitor architecture to move
-farm management from the field to an office. There are many enterprise solutions and many parts and prototypes. <i
+farm management from the field to an office. There are many enterprise solutions and many one-off examples. <i
 class="inline example"><span>cat tracker</span>tracking animal movement can offer some better insights into
-farming methodologies. As the ol' adage goes, the pork's right there.</i></p>
+animal behavior and farming methodologies.</i> Developing one-off solutions to solve specific problems, like turning a
+cat tracker into a cow tracker, can be costly and ineffective.</p>
 <h3 id="industry-classification.civil">Civil</h3>
 <h4>Transportation</h4>
 <p>Traffic control enhances safety on roadways. Embedded electronic devices are successful in creating a small
@@ -107,18 +110,21 @@ workers less common and moved less privileged families into more comfortable and
 
 @section('Basic Networking')
 <h1 id="basic-networking" class="title">Basic Networking
+@component('component.pin',['id'=>'basic-networking'])@endcomponent
 @component('component.filter',['id'=>'basic-networking'])@endcomponent</h1>
 <h2 class="subtitle">IoT networks provide basic interoperability, clustering, and enable smart features.</h2>
 @endsection
 
 @section('IoT Protocols')
 <h1 id="iot-protocols" class="title">IoT Protocols
+@component('component.pin',['id'=>'iot-protocols'])@endcomponent
 @component('component.filter',['id'=>'iot-protocols'])@endcomponent</h1>
 <h2 class="subtitle">Diverse communication protocols enable communication.</h2>
 @endsection
 
 @section('Interoperability')
 <h1 id="interoperability" class="title">
+@component('component.pin',['id'=>'interoperability'])@endcomponent
 Interoperability
 @component('component.filter',['id'=>'interoperability'])@endcomponent</h1>
 <h2 class="subtitle">Interoperabilty features and services bridge IoT devices and device clusters.</h2>
@@ -126,6 +132,7 @@ Interoperability
 
 @section('Theory')
 <h1 id="theory-and-application" class="title">Theory and Applications
+@component('component.pin',['id'=>'theory-and-application'])@endcomponent
 @component('component.filter',['id'=>'theory-and-application'])@endcomponent</h1>
 <h2>Examples applied in various market sectors</h2>
 @endsection

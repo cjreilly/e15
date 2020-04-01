@@ -228,15 +228,23 @@ section.full-window
   height: 100%;
 }
 
+.pinbar ul>li,
+.pinbar ul>li.collapsed,
 .navbar ul>li,
 .navbar ul>li.collapsed
 {
   list-style-type:disclosure-closed;
 }
 
+.pinbar ul>li.expanded,
 .navbar ul>li.expanded
 {
   list-style-type:disclosure-open;
+}
+
+.pinbar
+{
+  position: fixed;
 }
 img.standard-external
 {
