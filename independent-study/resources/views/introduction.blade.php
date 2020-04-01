@@ -119,7 +119,6 @@ workers less common and moved less privileged families into more comfortable and
 
 @section('Interoperability')
 <h1 id="interoperability" class="title">
-@component('component.pin',['id'=>'interoperability'])@endcomponent
 Interoperability
 @component('component.filter',['id'=>'interoperability'])@endcomponent</h1>
 <h2 class="subtitle">Interoperabilty features and services bridge IoT devices and device clusters.</h2>
