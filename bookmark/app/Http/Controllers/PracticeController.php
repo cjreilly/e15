@@ -8,6 +8,9 @@ use Str;
 
 class PracticeController extends Controller
 {
+    /**
+     * Demonstrates deleting data
+     */
     public function practice7()
     {
         # First get a book to delete
@@ -21,6 +24,9 @@ class PracticeController extends Controller
         }
     }
     
+    /**
+     * Demonstrates updating data
+     */
     public function practice6()
     {
         # First get a book to update
@@ -40,6 +46,9 @@ class PracticeController extends Controller
         }
     }
 
+    /**
+     * Demonstrates the `first` method
+     */
     public function practice5()
     {
         $book = Book::where('slug', '=', 'the-martian')->first();
@@ -48,6 +57,9 @@ class PracticeController extends Controller
         dump($book->toArray());
     }
 
+    /**
+     * Demonstate reading data
+     */
     public function practice4()
     {
         //$book = new Book();
@@ -65,6 +77,9 @@ class PracticeController extends Controller
         }
     }
 
+    /**
+     * Demonstrates creating data
+     */
     public function practice3()
     {
         # Instantiate a new Book Model object
@@ -87,8 +102,9 @@ class PracticeController extends Controller
 
         dump('Added: ' . $book->title);
     }
+
     /**
-     * Demonstrating using the Book model
+     * Demonstrates using the Book model
      */
     public function practice2()
     {
@@ -99,7 +115,7 @@ class PracticeController extends Controller
     }
 
     /**
-     * Demonstrating the first practice example
+     * First practice example
      */
     public function practice1()
     {
