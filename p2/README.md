@@ -12,7 +12,7 @@ combinations of blank and populated telephone number and email address fields.
 ## Outside resources
 + Regular Expression Reference and Testing <https://regexr.com>
 + Laravel Documentation <https://laravel.com/docs>
-+ PHP Comon Documentation <https://www.php.net>
++ PHP Common Documentation <https://www.php.net>
 + W3 HTML Documentation <https://www.w3.org/TR/html52/>
 + W3 CSS Documentation <https://www.w3.org/TR/css-2018/>
 + W3Schools.com <https://www.w3schools.com/jsref/event_cancelbubble.asp>
