@@ -31,7 +31,10 @@
     <a href='{{ $book->info_url }}'>Learn more...</a>
 </p>
 
-<a class='btn btn-primary' href='/books/{{ $book->slug }}/edit'>Edit this book</a>
+<ul class='bookActions'>
+    <li><a href='/books/{{ $book->slug }}/edit'><i class="fa fa-edit"></i> Edit</a>
+    <li><a href='/books/{{ $book->slug }}/delete'><i class="fa fa-trash"></i> Delete</a>
+</ul>
 @endif
 
 @endsection

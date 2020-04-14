@@ -56,7 +56,9 @@ class BookController extends Controller
         $newBook->description = $request->description;
         $newBook->save();
 
-        return redirect('/books/create')->with(['flash-alert' => 'Your book '.$newBook->title.' was added.']);
+        return redirect('/books/create')->with([
+            'flash-alert' => 'Your book '.$newBook->title.' was added.'
+        ]);
     }
 
     /**
