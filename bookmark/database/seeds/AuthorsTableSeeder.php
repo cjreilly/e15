@@ -39,9 +39,7 @@ class AuthorsTableSeeder extends Seeder
             $author->last_name = $authorData[1];
             $author->birth_year = $authorData[2];
             $author->bio_url = $authorData[3];
-
             $author->save();
-
             $count--;
         }
     }

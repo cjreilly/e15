@@ -16,7 +16,14 @@ class BookController extends Controller
     */
     public function create(Request $request)
     {
-        return view('books.create');
+        # Get authors for our dropdown
+        $authors = Author::orderBy('last_name')
+            ->select(['id', 'first_name', 'last_name'])
+            ->get();
+
+        return view('books.create')->with([
+            'authors' => $authors
+        ]);
     }
 
 
@@ -152,7 +159,6 @@ class BookController extends Controller
     public function show($slug)
     {
         $book = Book::where('slug', '=', $slug)->first();
-
 
         return view('books.show')->with([
             'book' => $book,
