@@ -18,13 +18,30 @@
   - the receiver must only respond with addresses reversed
   - extra: requests have a timeout feature, which automatically destroys the request
 
-## Details
+## PathIDX
+The PathIDX table is a cross-referenced list for all paths to exist in the system.
+ + id / INTEGER
+ + path / VARCHAR
+
+## QueryIDX
+The QueryIDX table is a cross-referenced list for all queries to exist in the system.
+ + id / INTEGER
+ + path / VARCHAR
+
+## ServerIDX
+The ServerIDX table is a cross-referenced list of all servers to exist in the system.
+ + id / INTEGER
+ + path / VARCHAR
+
+## Path table
 Request data is small enough to avoid overwhelming the system. Consider the following parts:
  + tag / VARCHAR
- + path / VARCHAR
- + query / VARCHAR
+ + path / INTEGER
+ + query / INTEGER
  + port / NUMBER
  + destroy on / DATETIME
+
+
 ### Tag
  The tag field is the unique identifier for the record. The word 'tag' is used in lieu of the common 'id' column. The
  tag field is passed around publicly in plain text.
@@ -39,6 +56,25 @@ Request data is small enough to avoid overwhelming the system. Consider the foll
  app developer can *create* a new URL on the proxy system and *reuse* it for the hundreds of different robot addresses.
  Then all the developer needs to do is program the touchscreen gesture system to initiate the same request with those
  addresses. The app, deployed to other users, is an immediate multi-user control environment.
+
+#### Create
+  The creator enters the full URL. It is separated by parts. The system creates three records:
+  + A PathIDX record with a unique identifier and a path string.
+  + A QueryIDX record with a unique identifier and a query string.
+  + A Path record with the tag string, the PathIDX index, the QueryIDX index, the port number, and an optional
+  destroy_on record.
+  
+  The initial tag string is I=[ServerIDX.id]:[Path.port]:[PathIDX.id]:[QueryIDX.id].
+
+  The information density is increased with lookup tables ServerIDX, PathIDX, and QueryIDX. An example for the first
+  record is I="1:80:1:1". Maximum length is expected for 5-digit hosts, 5-digit ports, 6-digit paths, and 6-digit
+  queries.
+
+#### Reuse
+
+
+#### Delete
+
 
 ### Issues
  + The URL, if intercepted, is easily reproducible.

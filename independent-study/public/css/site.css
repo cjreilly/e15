@@ -1,0 +1,36 @@
+* {
+* font-family: Helvetica;
+}
+img.icon {
+  max-width:2em;
+}
+a {
+  color:#337700;
+  text-decoration: none;
+}
+.theme {
+  font-family:AlienLeagueGradBold;
+}
+a:hover {
+  color:#44AA00;
+}
+.large-font {
+  font-size:150%;
+}
+
+@font-face {
+  font-family: "AlienLeague";
+  src: url("/fonts/alienleagueiiexpand.ttf");
+}
+@font-face {
+  font-family: "AlienLeagueD";
+  src: url("/fonts/alienleague3d.ttf");
+}
+@font-face {
+  font-family: "AlienLeagueGrad";
+  src: url("/fonts/alienleaguegrad.ttf");
+}
+@font-face {
+  font-family: "AlienLeagueGradBold";
+  src: url("/fonts/alienleaguegradbold.ttf");
+}

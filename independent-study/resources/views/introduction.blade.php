@@ -10,13 +10,13 @@
 @endsection
 
 @section('head')
-<link href='/css/olspring.css' type='text/css' rel='stylesheet'>
+<link href='/css/site.css' type='text/css' rel='stylesheet'>
 <link href='/css/style.css' type='text/css' rel='stylesheet'>
 @endsection
 
 @section('header')
 <span class="header container">
-  <span class="container">Notes</span>
+  <span class="theme container"><h2>Research Notes</h2></span>
 </span>
 @endsection
 
@@ -113,6 +113,35 @@ workers less common and moved less privileged families into more comfortable and
 @component('component.pin',['id'=>'basic-networking'])@endcomponent
 @component('component.filter',['id'=>'basic-networking'])@endcomponent</h1>
 <h2 class="subtitle">IoT networks provide basic interoperability, clustering, and enable smart features.</h2>
+<p class="definition"><span>Service economy</span>an economic sector based on services. Sometimes a distinction in
+business between product sales and service sales are important in accounting for revenue. The main reason being that a
+service economy is fundamentally based on sales and subscriptions of continued services. The sale of products relies
+heavily on manufacturing and retail. IoT modularization connects service economies, such as grocery delivery and
+grocers, by selling physical infrastructure to the customer. The customer relies can leverage the physical device as
+well as services.</p>
+<p class="right-floating box">Why is it important to think about service economies? The toast is free when the smart
+toaster can communicate with the bread machine.</p>
+<p>It is necesary to enable connection to service providers in an efficient, secure way. Many IoT manufacturers are
+heavily invested in developing protocols for their devices to communicate on traditional network infrastructure. Those
+products are known to perform as interoperable devices. It would be ineffective to short a circuit. And likewise, it
+would be ineffecient to short a communication path when it is necessary to provide services. For example, the idea of
+free bread for a toaster that shorts the bread market is nice at first, but then it is overwhelmed with the responsibilities
+of having to ensure there is enough grain to make the flour. A task which even a smart toaster is ill adapted to
+perform.</p>
+<figure class="left-floating box">
+<img src="/images/sankeytoast.PNG" alt="A sankey diagram describes the bread, grain, and toast verticals."/>
+<figcaption class="apa">An example of competing verticals in developing smart toast.</figcaption>
+</figure>
+<p class="question"><span>Where to build the bridges</span>There must be a solution to the toast fiasco. Suppose then
+there are verticals - bread, grain, toast. There must be bridges to span those production gaps before the toast is on
+the table. At this point, it would again be tempting to ignore the subtleties and call the system a random mesh to have
+the toast and be finished with it. However, our sankey diagram details the more complicated environment that the
+toaster operates within. Hence, returning to the previous examples - the smart farm, smart factory and smart delivery
+vehicles - it is apparent that the toaster operates in a very competitive high-stake environment. With some very basic
+data visualization, the technology partnerships and protocols are palpable. Perhaps the smart toaster should be
+a finely tuned derivative of the penultimate smart panini-producer, equiped to produce both appetizer and entree sizes,
+toasted and un-toasted, sliced, diced, and plattered. The decision would be much different that a smart toaster that
+bakes the bread, slices, and toasts.</p>
 @endsection
 
 @section('IoT Protocols')
