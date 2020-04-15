@@ -81,7 +81,8 @@ class BookController extends Controller
 
         # Load our book data using PHP's file_get_contents
         # We specify our books.json file path using Laravel's database_path helper
-        $bookData = file_get_contents(database_path('books.json'));
+        # $bookData = file_get_contents(database_path('books.json'));
+        $bookData = Book::all()->toJson();
     
         # Convert the string of JSON text we loaded from books.json into an
         # array using PHP's built-in json_decode function
