@@ -1,6 +1,10 @@
 @section('blade')
     Master blade
 @endsection
+
+@section('notification')
+    <h3>{{ $notification ?? '' }}</h3>
+@endsection
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -11,6 +15,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="/css/site.css" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -72,6 +77,15 @@
                 <div class="title m-b-md">
                     @yield('blade')
                 </div>
+                @isset($notification)
+                    @yield('notification')
+                @endisset
+                @isset($options)
+                    <div>
+                        <span>INGS Options</span>
+                        <span>@yield('options')</span>
+                    </div>
+                @endisset
             </div>
         </div>
     </body>

@@ -1,6 +1,6 @@
 @extends('master')
 
 @section('blade')
-    Reuse blade
+    Reuser blade
 @endsection
 

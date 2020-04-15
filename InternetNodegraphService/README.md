@@ -58,7 +58,7 @@ Request data is small enough to avoid overwhelming the system. Consider the foll
  addresses. The app, deployed to other users, is an immediate multi-user control environment.
 
 #### Create
-  The creator enters the full URL. It is separated by parts. The system creates three records:
+  The creator enters the full request with a POST form. It is separated by parts. The system creates three records:
   + A PathIDX record with a unique identifier and a path string.
   + A QueryIDX record with a unique identifier and a query string.
   + A Path record with the tag string, the PathIDX index, the QueryIDX index, the port number, and an optional
@@ -70,10 +70,26 @@ Request data is small enough to avoid overwhelming the system. Consider the foll
   record is I="1:80:1:1". Maximum length is expected for 5-digit hosts, 5-digit ports, 6-digit paths, and 6-digit
   queries.
 
-#### Reuse
+  If the creator attempts to create a tag that already exists, the existing tag is returned without creating a new
+  record. The creator receives the tag upon creating one. If there is an error, the creator receives an error message
+  and no tag.
 
+  Interfaces:
+  + /path/create
+
+#### Reuse
+  The reuser submits a GET request in one of several different ways. Each request should be considered as an efficient
+  interface for requesting the resource.
+  Interfaces:
+  + /[tag]
+  + /path/reuse/[tag]
+
+  The reuser must know and supply the tag. There is no option to recover a tag if it is lost.
 
 #### Delete
+  The deleter must know and supply the tag. Upon supplying a tag to the delete blade, the system removes the record.
+  Interfaces:
+  + /path/delete/[tag]
 
 
 ### Issues

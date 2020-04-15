@@ -15,7 +15,7 @@ class PathController extends Controller
      */
     public function create(Request $request)
     {
-        return view('path.create');
+        return view('path.create')->with(['options'=>1]);
     }
 
 
@@ -25,7 +25,7 @@ class PathController extends Controller
      */
     public function destroy(Request $request)
     {
-        return view('path.destroy');
+        return view('path.destroy')->with(['options'=>1]);
     }
 
     /**
@@ -33,16 +33,23 @@ class PathController extends Controller
      */
     public function reuse(Request $request)
     {
-        dump("<p>Sorry, it's not here yet.</p.");
+        return view('path.reuse')->with(['options'=>1]);
     }
 
     /**
-     * GET /debug/path
+     * GET /
      * Show all the path in the library
      */
-    public function index()
+    public function index($option=null)
     {
-        return view('path.index');
+        $options=['create'=>1,'destroy'=>1,'reuse'=>1];
+        if (isset($option)) {
+            $option=explode("&",$option);
+            foreach ($option as $optionWord) {
+                $options[$optionWord]=1;
+            }
+        }
+        return view('path.index')->with(['options'=>$options]);
     }
 
     /**
@@ -281,5 +288,4 @@ class PathController extends Controller
         $decodedParameterFields = PathController::decodeParameterFields($encodedParameterFields);
         dump($decodedParameterFields);
     }
-
 }
