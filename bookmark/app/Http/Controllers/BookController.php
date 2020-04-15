@@ -202,6 +202,28 @@ class BookController extends Controller
     }
 
     /**
+     * PUT /books/{$slug}
+     */
+    public function remove(Request $request, $slug)
+    {
+
+        $book = Book::where('slug', '=', $slug)->first();
+        if ($book == null) {
+            return redirect('/books')->with([
+                'flash-alert' => 'Unable to remove the book. It does not exist.'
+            ]);
+        }
+
+        $request->validate([
+            'slug' => 'required|unique:books,slug,'.$book->id.'|alpha_dash'
+        ]);
+        $book->delete();
+        return redirect('/books')->with([
+            'flash-alert' => 'Your book is removed.'
+        ]);
+    }
+
+    /**
      * GET /filter/{$category}/{subcategory?}
      * Example demonstrating multiple parameters
      * Not a feature we're actually building, so I'm commenting out

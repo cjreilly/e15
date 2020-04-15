@@ -24,6 +24,7 @@ Route::post('/books', 'BookController@store');
 # Update a book
 Route::get('/books/{slug}/edit', 'BookController@edit');
 Route::put('/books/{slug}', 'BookController@update');
+Route::post('/books/{slug}/remove', 'BookController@remove');
 
 # Show all books
 Route::get('/books', 'BookController@index');

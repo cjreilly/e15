@@ -43,8 +43,16 @@
         <label for='description'>Description</label>
         <textarea name='description'>{{ old('description', $book->description) }}</textarea>
 
-        <input type='submit' class='btn btn-primary' value='Update'>
+        <input type='submit' id="update" class='btn btn-primary' value='Update'>
 
+    </form>
+    <form method='POST' action='/books/{{ $book->slug }}/remove'>
+
+        {{ csrf_field() }}
+
+        <input type='hidden' name='slug' id='slug' value='{{ old('slug', $book->slug) }}'>
+
+        <input type='submit' class='btn btn-primary' value='Remove'>
     </form>
 
     @if(count($errors) > 0)
