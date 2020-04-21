@@ -81,8 +81,8 @@ class BooksTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         for ($i = 0; $i < 5; $i++) {
-            $book = new Book();
             $title = $faker->words(rand(3, 6), true);
+            $book = new Book();
             $book->title = Str::title($title);
             $book->slug = Str::slug($title, '-');
             $book->author_id = rand(5,8);
