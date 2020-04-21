@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('head')
-    
+    <link href='/css/lists/show.css' rel='stylesheet'>
 @endsection
 
 @section('title')
@@ -10,6 +10,7 @@
 
 @section('content')
 
+    <h1>My List</h1>
     @if($books->count() == 0)
         <p>You have not added any books to your list yet.</p>
         <p>Start building your list by checking out the <a href='/books'>books in our library...</a></p>
@@ -22,13 +23,17 @@
                 <p>By {{ $book->author->first_name. ' ' . $book->author->last_name }}</p>
             @endif
 
-            <p class='notes'>
-                {{ $book->pivot->notes }}
-            </p>
+            <form method='POST' action='#'>
+                <textarea class='notes'>{{ $book->pivot->notes }}</textarea>
+                <input type='submit' class='btn btn-primary' value='Update notes'>
+            </form>
 
             <p class='added'>
-                Added {{ $book->pivot->created_at->diffForHumans() }}
+                Added to your list {{ $book->pivot->created_at->diffForHumans() }}
             </p>
+
+           <a href='#'><i class="fa fa-minus-circle"></i> Remove from your list</a>
+
         </div>
         @endforeach
 

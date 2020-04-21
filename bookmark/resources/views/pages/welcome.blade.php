@@ -12,7 +12,7 @@
     </p>
 
     <p>
-        <a href='/register'>Register now to get started...</a>
+        <a href='/register' dusk='register-link'>Register now to get started...</a>
     </p>
 @else
     <p>

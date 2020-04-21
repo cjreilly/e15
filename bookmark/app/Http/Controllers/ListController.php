@@ -7,6 +7,9 @@ use App\Book;
 
 class ListController extends Controller
 {
+    /**
+     * GET /list
+     */
     public function show(Request $request)
     {
         $books = $request->user()->books->sortByDesc('pivot.created_at');
@@ -14,6 +17,9 @@ class ListController extends Controller
         return view('lists.show')->with(['books' => $books]);
     }
 
+    /**
+     * GET /list/{slug?}/add
+     */
     public function add($slug)
     {
         $book = Book::findBySlug($slug);
@@ -23,6 +29,9 @@ class ListController extends Controller
         return view('lists.add')->with(['book' => $book]);
     }
 
+    /**
+     * POST /list/{slug?}/add
+     */
     public function save(Request $request, $slug)
     {
         # TODO: Validate incoming data, making sure they entered a note

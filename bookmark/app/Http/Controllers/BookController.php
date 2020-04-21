@@ -26,7 +26,6 @@ class BookController extends Controller
         ]);
     }
 
-
     /**
     * POST /books
     * Process the form for adding a new book
@@ -222,6 +221,18 @@ class BookController extends Controller
         $request->validate([
             'slug' => 'required|unique:books,slug,'.$book->id.'|alpha_dash'
         ]);
+    }
+
+    /**
+    * Deletes the book
+    * DELETE /books/{slug}/delete
+    */
+    public function destroy($slug)
+    {
+        $book = Book::findBySlug($slug);
+
+        $book->users()->detach();
+
         $book->delete();
         return redirect('/books')->with([
             'flash-alert' => 'Your book is removed.'
