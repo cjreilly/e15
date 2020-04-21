@@ -122,16 +122,6 @@ class BookController extends Controller
         ]);
     }
 
-
-    /**
-     * GET /list
-     */
-    public function list()
-    {
-        # TODO
-        return view('books.list');
-    }
-
     /**
      * GET /books
      * Show all the books in the library

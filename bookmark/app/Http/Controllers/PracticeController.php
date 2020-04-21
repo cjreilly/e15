@@ -6,34 +6,35 @@ use Illuminate\Http\Request;
 use App\Book;
 use Str;
 use App\Author;
+use App\User;
 
 class PracticeController extends Controller
 {
+
+    /**
+    *
+    */
+    public function practice21()
+    {
+        $books = Book::with('users')->get();
+
+        foreach ($books as $book) {
+            dump($book->title);
+            dump($book->users->toArray());
+        }
+    }
+
+
     /**
     *
     */
     public function practice20()
     {
-        $book = true;
+        $user = User::where('email', '=', 'jill@harvard.edu')->first();
 
-        while ($book) {
-            #retrieve books
-            $book = Book::where('author', '=', 'J.K. Rowling')->first();
-
-            #make sure there is a book retrieved
-            if (!$book) {
-                dump('Book not found or all books have been updated.');
-            } else {
-                #book found and now correct the authors name
-                $book->author = 'JK Rowling';
-
-                #save changes
-                $book->save();
-
-                dump($book->title, "Updated Author to", $book->author);
-            }
-        }
+        dump($user->books->toArray());
     }
+
 
 
     /**
