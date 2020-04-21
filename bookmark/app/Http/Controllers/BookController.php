@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Arr;
 use Str;
 use App\Book;
+use App\Author;
 
 class BookController extends Controller
 {
@@ -32,7 +33,7 @@ class BookController extends Controller
         $request->validate([
             'slug' => 'required|unique:books,slug|alpha_dash',
             'title' => 'required',
-            'author' => 'required',
+            'author_id' => 'required|integer',
             'published_year' => 'required|digits:4',
             'cover_url' => 'url',
             'info_url' => 'url',
@@ -47,7 +48,7 @@ class BookController extends Controller
         $newBook = new Book();
         $newBook->slug = $request->slug;
         $newBook->title = $request->title;
-        $newBook->author = $request->author;
+        $newBook->author_id = $request->author_id;
         $newBook->published_year = $request->published_year;
         $newBook->cover_url = $request->cover_url;
         $newBook->info_url = $request->info_url;
@@ -154,6 +155,7 @@ class BookController extends Controller
         return view('books.show')->with([
             'book' => $book,
             'slug' => $slug,
+            'author' => Author::where('id',$book->author_id)->first()
         ]);
     }
 
@@ -163,9 +165,13 @@ class BookController extends Controller
     public function edit(Request $request, $slug)
     {
         $book = Book::where('slug', '=', $slug)->first();
+        $select = [ 
+            'authors' => Author::orderBy('last_name')->select(['id','first_name','last_name'])->get()
+        ];
 
         return view('books.edit')->with([
-            'book' => $book
+            'book' => $book,
+            'select' => $select
         ]);
     }
 
@@ -179,7 +185,7 @@ class BookController extends Controller
         $request->validate([
             'slug' => 'required|unique:books,slug,'.$book->id.'|alpha_dash',
             'title' => 'required',
-            'author' => 'required',
+            'author_id' => 'required|integer',
             'published_year' => 'required|digits:4',
             'cover_url' => 'url',
             'info_url' => 'url',
@@ -189,7 +195,7 @@ class BookController extends Controller
 
         $book->slug = $request->slug;
         $book->title = $request->title;
-        $book->author = $request->author;
+        $book->author_id = $request->author_id;
         $book->published_year = $request->published_year;
         $book->cover_url = $request->cover_url;
         $book->info_url = $request->info_url;

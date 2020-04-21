@@ -17,7 +17,12 @@
 
 <h1>{{ $book->title }}</h1>
 
-<p>By {{ $book->author }} ({{ $book->published_year }})</p>
+<p>
+@if ($author != null)
+    By {{ $author->first_name.' '.$author->last_name }}
+@endif
+    ({{ $book->published_year }})
+</p>
 
 <a href='{{ $book->purchase_url }}'>Purchase...</a>
 

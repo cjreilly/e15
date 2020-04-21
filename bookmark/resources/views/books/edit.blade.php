@@ -25,8 +25,22 @@
         <label for='title'>* Title</label>
         <input type='text' name='title' id='title' value='{{ old('title', $book->title) }}'>
 
-        <label for='author'>* Author</label>
-        <input type='text' name='author' id='author' value='{{ old('author', $book->author) }}'>
+        @if (isset($select['authors']))
+            <label for='author_id'>* Author {{ old('author_id') }}</label>
+            <select name='author_id' id='author_id'>
+                <option value=''>Choose one...</option>
+                @foreach ($select['authors'] as $author)
+                    <option value='{{ $author->id }}' {{ (old('author_id') != null && old('author_id') == $author->id)
+                                                        || (old('author_id') == null && $book->author_id == $author->id) ? 
+                                                          'selected' : ''}}>
+                        {{ $author->first_name.' '.$author->last_name }}
+                    </option>
+                @endforeach
+            </select>
+        @else
+            <label for='author'>* Author</label>
+            <input type='text' name='author' id='author' value='{{ old('author', $book->author) }}'>
+        @endif
 
         <label for='published_year'>* Published Year (YYYY)</label>
         <input type='text' name='published_year' id='published_year' value='{{ old('published_year', $book->published_year) }}'>
