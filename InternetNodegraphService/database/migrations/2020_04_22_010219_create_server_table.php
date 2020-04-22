@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePathTable extends Migration
+class CreateServerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePathTable extends Migration
      */
     public function up()
     {
-        Schema::create('paths', function (Blueprint $table) {
+        Schema::create('servers', function (Blueprint $table) {
             $table->id();
-            $table->string('path',2048);
+            $table->string('server',256);
             $table->dateTime('destroy_on');
         });
-        Schema::dropIfExists('users');
     }
 
     /**
@@ -28,6 +27,6 @@ class CreatePathTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paths');
+        Schema::dropIfExists('servers');
     }
 }

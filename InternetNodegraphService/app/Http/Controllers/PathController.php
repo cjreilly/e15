@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Arr;
 use Str;
-use App\Book;
+use App\Path;
+use App\Query;
+use App\Server;
 
 class PathController extends Controller
 {
@@ -15,9 +19,62 @@ class PathController extends Controller
      */
     public function create(Request $request)
     {
+        if ($request->hasAny(['server','port','path','query']))
+        {
+            $validator = Validator::make($request->all(), [
+                    'server' => 'required|max:256',
+                    'port' => 'nullable|integer',
+                    'path' => 'nullable|max:2048',
+                    'query' => 'nullable|max:2048'
+            ]);
+            $validator->validate();
+            if ($validator->fails()) {
+                return view('path.create')->with(['options'=>1])
+                      ->withErrors($validator, 'create');
+            }
+            $serverText = $request->input('server');
+            $portText = $request->input('port');
+            $pathText = $request->input('path');
+            $queryText = $request->input('query');
+            $serverId=0;
+            $portId=$portText;
+            if ($portId == 0) {
+                $portId = 80;
+            }
+            $pathId=0;
+            $queryId=0;
+            DB::table('servers')->updateOrInsert(['server' => $serverText],
+                      [
+                          'server' => $serverText,
+                          'destroy_on' => now()->addDays(5)->toDateTimeString()
+            ]);
+            $server = Server::where('server',$serverText)->first();
+            $serverId=$server->id;
+            if ($pathText != null) {
+                DB::table('paths')->updateOrInsert(['path' => $pathText],
+                          [
+                              'path' => $pathText,
+                              'destroy_on' => now()->addDays(5)->toDateTimeString()
+                ]);
+                $path = Path::where('path',$pathText)->first();
+                $pathId=$path->id;
+            }
+            if ($queryText != null) {
+                DB::table('queries')->updateOrInsert(['query' => $queryText],
+                            [
+                                'query' => $queryText,
+                                'destroy_on' => now()->addDays(5)->toDateTimeString()
+                ]);
+                $query = Query::where('query',$queryText)->first();
+                $queryId=$query->id;
+            }
+            $pathTagText = PathController::encodeParameterFields(
+                            $serverId, $portId, $pathId, $queryId);
+            return view('path.receipt')
+                    ->with(['options'=>1,'tag'=>$pathTagText]);
+        }
         return view('path.create')->with(['options'=>1]);
     }
-
 
     /**
      * POST /path/destroy
@@ -31,9 +88,39 @@ class PathController extends Controller
     /**
      * POST /path/reuse
      */
-    public function reuse(Request $request)
+    public function reuse(Request $request, $tag=null)
     {
-        return view('path.reuse')->with(['options'=>1]);
+        if ($request->input('tag')) {
+            $tag = $request->input('tag');
+        }
+        if ($tag == null) {
+            return view('path.reuse')->with(['options'=>1]);
+        } else {
+            $resource = PathController::decodeParameterFields($tag);
+            $server = Server::where('id',$resource['ServerIDX'])->first();
+            $portText = $resource['Port'];
+            $path = Path::where('id',$resource['PathIDX'])->first();
+            $query = Query::where('id',$resource['QueryIDX'])->first();
+            $serverText='/';
+            $pathText='';
+            $queryText='';
+            if ($server != null) {
+                $serverText = $server->server;
+            } else {
+                return view('path.index');
+            }
+            if ($path != null) {
+                $pathText = $path->path;
+            }
+            if ($query != null) {
+                $queryText = $query->query;
+            }
+            $uri = $serverText.
+                      ($portText == '' ? '' : ':'.$portText).
+                      ($pathText == '' ? '' : '/'.$pathText).
+                      ($queryText == '' ? '' : $queryText);
+            return redirect()->away($uri);
+        }
     }
 
     /**
@@ -42,7 +129,7 @@ class PathController extends Controller
      */
     public function index($option=null)
     {
-        $options=['create'=>1,'destroy'=>1,'reuse'=>1];
+        $options=['create'=>0,'destroy'=>0,'reuse'=>0];
         if (isset($option)) {
             $option=explode("&",$option);
             foreach ($option as $optionWord) {
@@ -163,12 +250,10 @@ class PathController extends Controller
             $leadingZeroCount=$length-strlen($parameter);
             $encodedString = $parameter;
             $encodedString = str_pad($encodedString,$leadingZeroCount,"0",STR_PAD_LEFT);
-            #dump($encodedString);
         } else {
             $encodedString = $parameter;
         }
         $normalizedParameter=PathController::stringParameter($encodedString,6);
-        #dump($normalizedParameter);
         return base_convert($normalizedParameter,2,10);
     }
     /**
@@ -194,16 +279,12 @@ class PathController extends Controller
         $normalizedFieldLength3 = PathController::normalizeParameter($encodedFieldLength3,4);
         $normalizedFieldLength4 = PathController::normalizeParameter($encodedFieldLength4,4);
         $normalizedFieldLength=$normalizedFieldLength1.$normalizedFieldLength2.$normalizedFieldLength3.$normalizedFieldLength4;
-        #dump(PathController::normalizeParameter($encodedFieldLength1,4));
-        #dump(PathController::normalizeParameter($encodedFieldLength2,4));
-        #dump(PathController::normalizeParameter($encodedFieldLength3,4));
-        #dump(PathController::normalizeParameter($encodedFieldLength4,4));
         $encodedHeader=PathController::parameterString($normalizedFieldLength,8);
         $fieldString=$encodedHeader.
-                      $encodedField1.
-                      $encodedField2.
-                      $encodedField3.
-                      $encodedField4;
+            $encodedField1.
+            $encodedField2.
+            $encodedField3.
+            $encodedField4;
         return $fieldString;
     }
     /**
@@ -214,7 +295,6 @@ class PathController extends Controller
     protected static function decodeParameterFields($fields)
     {
         $encodedHeader="0".substr($fields,0,1)."0".substr($fields,1,1);
-        #dump($encodedHeader);
         $character1=PathController::parameterCharacterInteger(substr($fields,0,1));
         $character2=PathController::parameterCharacterInteger(substr($fields,1,1));
         $normalizedCharacter1=base_convert($character1,10,2);
@@ -223,43 +303,26 @@ class PathController extends Controller
         $normalizedCharacter2=str_pad($normalizedCharacter2,8,"0",STR_PAD_LEFT);
 
         $normalizedFieldLength=PathController::stringParameter($encodedHeader,6);
-        #dump($normalizedFieldLength);
         $normalizedFieldLength1=substr($normalizedCharacter1,0,4);
         $normalizedFieldLength2=substr($normalizedCharacter1,4,4);
         $normalizedFieldLength3=substr($normalizedCharacter2,0,4);
         $normalizedFieldLength4=substr($normalizedCharacter2,4,4);
-        #dump($normalizedFieldLength1);
-        #dump($normalizedFieldLength2);
-        #dump($normalizedFieldLength3);
-        #dump($normalizedFieldLength4);
         $fieldLength1=base_convert($normalizedFieldLength1,2,10);
         $fieldLength2=base_convert($normalizedFieldLength2,2,10);
         $fieldLength3=base_convert($normalizedFieldLength3,2,10);
         $fieldLength4=base_convert($normalizedFieldLength4,2,10);
-        #dump($fieldLength1);
-        #dump($fieldLength2);
-        #dump($fieldLength3);
-        #dump($fieldLength4);
         $encodedField1 = substr($fields,2,$fieldLength1);
         $encodedField2 = substr($fields,2+$fieldLength1,$fieldLength2);
         $encodedField3 = substr($fields,2+$fieldLength1+$fieldLength2,$fieldLength3);
         $encodedField4 = substr($fields,2+$fieldLength1+$fieldLength2+$fieldLength3,$fieldLength4);
-        #dump($encodedField1);
-        #dump($encodedField2);
-        #dump($encodedField3);
-        #dump($encodedField4);
         $decodedField1=PathController::decodeParameter($encodedField1,14);
         $decodedField2=PathController::decodeParameter($encodedField2,14);
         $decodedField3=PathController::decodeParameter($encodedField3,14);
         $decodedField4=PathController::decodeParameter($encodedField4,14);
-        #dump($decodedField1);
-        #dump($decodedField2);
-        #dump($decodedField3);
-        #dump($decodedField4);
         return ["ServerIDX" => $decodedField1,
-                "Port" => $decodedField2,
-                "PathIDX" => $decodedField3,
-                "QueryIDX" => $decodedField4];
+               "Port" => $decodedField2,
+               "PathIDX" => $decodedField3,
+               "QueryIDX" => $decodedField4];
     }
 
     /**
@@ -275,10 +338,10 @@ class PathController extends Controller
         $out3=262143;
         $out4=262143;
         $queryData=[
-          "ServerIDX" => $out1,
-          "Port" => $out2,
-          "PathIDX" => $out3,
-          "QueryIDX" => $out4
+            "ServerIDX" => $out1,
+            "Port" => $out2,
+            "PathIDX" => $out3,
+            "QueryIDX" => $out4
         ];
         dump($queryData);
         $encodedParameterFields = PathController::encodeParameterFields($out1,$out2,$out3,$out4);

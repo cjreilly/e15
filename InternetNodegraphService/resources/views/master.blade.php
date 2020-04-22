@@ -5,6 +5,23 @@
 @section('notification')
     <h3>{{ $notification ?? '' }}</h3>
 @endsection
+
+@section('quicklinks')
+    <span class="header quicklink bar"> <a href="/"> root </a></span>
+@endsection
+
+@section('quickmessage')
+    @if (count($errors) > 0)
+    <span class="header alert bar">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </span>
+    @endif
+@endsection
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -72,6 +89,8 @@
         </style>
     </head>
     <body>
+        @yield('quicklinks')
+        @yield('quickmessage')
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">
@@ -81,10 +100,12 @@
                     @yield('notification')
                 @endisset
                 @isset($options)
-                    <div>
-                        <span>INGS Options</span>
-                        <span>@yield('options')</span>
-                    </div>
+                    @if ($options != 0)
+                        <div>
+                            <span>INS Options</span>
+                            <span>@yield('options')</span>
+                        </div>
+                    @endif
                 @endisset
             </div>
         </div>
