@@ -21,12 +21,27 @@ class NoteController extends Controller
     public function home()
     {
         $title='Internet Things';
+        $section = [
+            'Industry Classification',
+            'Basic Networking',
+            'IoT Protocols',
+            'Interoperability'
+        ];
+        $farmData = [
+            'cols'=> [
+              array('id'=> 'input',  'label'=> 'Input', 'type'=> 'string'),
+              array('id'=> 'output', 'label'=> 'Output',' type'=> 'string'),
+              array('id'=> 'volume', 'label'=> 'Volume',' type'=> 'number')
+            ],
+            'rows'=> [
+              ['Farm Output', 'Milk', 2.52],
+              ['Farm Output','Cattle', 1.38]
+            ]
+        ];
         return view('introduction')->with(['title' => $title,
-                                            'section' =>
-                          ['Industry Classification',
-                            'Basic Networking',
-                            'IoT Protocols',
-                            'Interoperability']]);
+                                           'section' => $section,
+                                           'farmData' => json_encode($farmData)]);
+
     }
     public function filterSection($id)
     {

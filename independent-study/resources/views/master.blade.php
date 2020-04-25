@@ -19,6 +19,13 @@ $pins = session('pin');
 @endif
 @endsection
 
+@section('footer')
+<hr class="break"/>
+<a href="http://e15p2.loc">Comments</a>
+<a href="https://github.com/cjreilly/e15" target="_blank">GitHub</a>
+&copy; {{ date('Y') }}
+@endsection
+
 @section('navbar')
 @component('component.home')@endcomponent
 @component('component.clearsession')@endcomponent

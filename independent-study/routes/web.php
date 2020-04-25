@@ -15,3 +15,4 @@ Route::get('/', 'NoteController@home');
 Route::get('/clear-session', 'NoteController@clearSession');
 Route::get('/pin/{id}', 'NoteController@pin');
 Route::get('/{id}', 'NoteController@filterSection');
+Route::get('/data/{source}', 'DataController@jsonData');

@@ -12,6 +12,8 @@
 @section('head')
 <link href='/css/site.css' type='text/css' rel='stylesheet'>
 <link href='/css/style.css' type='text/css' rel='stylesheet'>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 @endsection
 
 @section('header')
@@ -119,18 +121,19 @@ service economy is fundamentally based on sales and subscriptions of continued s
 heavily on manufacturing and retail. IoT modularization connects service economies, such as grocery delivery and
 grocers, by selling physical infrastructure to the customer. The customer relies can leverage the physical device as
 well as services.</p>
-<p class="right-floating box">Why is it important to think about service economies? The toast is free when the smart
-toaster can communicate with the bread machine.</p>
+<p class="right-floating box">Why is it important to think about service economies? All we have to do is network the
+smart toaster to the bread machine for free toast.</p>
 <p>It is necesary to enable connection to service providers in an efficient, secure way. Many IoT manufacturers are
-heavily invested in developing protocols for their devices to communicate on traditional network infrastructure. Those
-products are known to perform as interoperable devices. It would be ineffective to short a circuit. And likewise, it
+heavily invested in developing protocols for their devices to communicate on traditional network infrastructure - built
+to be interoperable with similar controls. It would be ineffective to short a circuit. And likewise, it
 would be ineffecient to short a communication path when it is necessary to provide services. For example, the idea of
 free bread for a toaster that shorts the bread market is nice at first, but then it is overwhelmed with the responsibilities
-of having to ensure there is enough grain to make the flour. A task which even a smart toaster is ill adapted to
+of having to automate the grain production to mill the flour. A task which even a smart toaster is ill adapted to
 perform.</p>
 <figure class="left-floating box">
-<img src="/images/sankeytoast.PNG" alt="A sankey diagram describes the bread, grain, and toast verticals."/>
-<figcaption class="apa">An example of competing verticals in developing smart toast.</figcaption>
+<!--img src="/images/sankeytoast.PNG" alt="A sankey diagram describes the bread, grain, and toast verticals."/-->
+@include('sankey')
+<figcaption class="apa">A hypothetical example of competing verticals in developing smart toast.</figcaption>
 </figure>
 <p class="question"><span>Where to build the bridges</span>There must be a solution to the toast fiasco. Suppose then
 there are verticals - bread, grain, toast. There must be bridges to span those production gaps before the toast is on
@@ -142,6 +145,18 @@ data visualization, the technology partnerships and protocols are palpable. Perh
 a finely tuned derivative of the penultimate smart panini-producer, equiped to produce both appetizer and entree sizes,
 toasted and un-toasted, sliced, diced, and plattered. The decision would be much different that a smart toaster that
 bakes the bread, slices, and toasts.</p>
+<p></p>
+<p>In the hypothetical dirt-to-toast business, it is a good idea to make very careful selections in where to make
+investements. An automated irrigation system may work in one place, while a ditch works in another place. To revisit
+the vertical again, and to make it more realistic, let's assume that a rotary irrigator runs on a plateau. Soil
+saturation is not fantastic, so there is water runoff into a neighboring valley. Dams and irrigation
+ditches are in place as flood control measures, in addition to some micro-hydro installation. All of the infrastructure
+begins to add up to a system that must be managed, at least cooperatively by joint stakeholders.</p>
+<p>Then maybe it is convincing enough to investigate some basic networking.</p>
+<figure class="box">
+<img src="/images/complex-network.svg" alt="A complex home network diagram."/>
+<figcamption class="apa">A logical diagram describing some basic networking concepts.</figcaption>
+</figure>
 @endsection
 
 @section('IoT Protocols')
@@ -172,11 +187,4 @@ Interoperability
   @yield($S)
 @endforeach
 
-@endsection
-
-@section('footer')
-<hr class="break"/>
-<a href="http://e15p2.loc">Comments</a>
-<a href="https://github.com/cjreilly/e15" target="_blank">GitHub</a>
-&copy; {{ date('Y') }}
 @endsection
