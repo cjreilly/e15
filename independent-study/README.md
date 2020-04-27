@@ -11,9 +11,11 @@ Outline:
 + Protocols
   + Bluetooth
   + BLE
+  + LoRaWAN
+  + 6LoWPAN
+  + ANT/ANT+
   + ZigBee
   + Z-Wave
-  + 6LoWPAN
   + 3G & 4G
   + 5G
   + LTE Cat 0,1,3
@@ -22,8 +24,6 @@ Outline:
   + NFC
   + RFID
   + SigFox
-  + LoRaWAN
-  + ANT/ANT+
   + EnOcean
   + NB-IoT
 + Communication bands
@@ -62,13 +62,20 @@ enhance those signals with context information. The terminal end may employ a co
 monitor and control. Other terminal ends may employ gestures and voice for more intuitive systems. In this way the
 system is expanded beyond a type-and-monitor setting.
 
-### Home
+### Industry
 
 
 ### Civil
 
+[Infrastructure in mountain roads] (https://youtu.be/4icF0ULLcuo)
 
-### Industry
+[Libelium engineer demonstrates smart roads] (https://youtu.be/m-C1gmi1du0)
+
+### Home
+
+
+
+
 
 
 # Basic networking
@@ -108,8 +115,8 @@ The OSI model is widely studied because it is applicable to much of the home and
 layer OSI model performs a specific task of encapsulating a signal transmission from one compatible machine to another
 using TCP/IP.
 
-|   | Layer           |  Use                        |
-|---| -------------   | --------------------------- |
+|   | Layer           |  Use                        | Other Terms |
+|---| -------------   | --------------------------- | ----- |
 | 7 | Application     | File transfer, E-mail, HTTP |
 | 6 | Presentation    | Data formatting, ASCII, JPG, GIF  |
 | 5 | Session         | Set-up, exchange, tear-down; SQL and RPC |
@@ -117,7 +124,7 @@ using TCP/IP.
 | 3 | Network         | Packet switching and routing; IP and AppleTalk |
 | 2 | Data link (MAC) | Media access layer; access and data permission |
 | 2 | Data link (LLC) | Logical link layer; frame synchronization |
-| 1 | Physical        | Electrical and mechanical bit stream |
+| 1 | Physical        | Electrical and mechanical bit stream | PHY (physical) |
 
 [The 7 Layers of the OSI Model] (https://www.webopedia.com/quick_ref/OSI_Layers.asp)
 
@@ -138,8 +145,63 @@ There is a multitude of terms and concepts
 X10 is a networked system separate from ethernet, fiber optic, and telephone communication lines. It is a standard in
 use in some systems for security and automation. X10 operates on 60Hz/120V home electrical lines. The X10 industry
 protocol, a sequence of codes to receive and transmit on the wire, is adaptable for other voltages.
-
 [X10Linked] (https://www.x10.com/)
+
+Many X10 devices are accomponied by in-line power filters. A power filter is an electrical filter designed specifically
+for the local voltage and frequency requirements. Hobbyists can measure frequency variations using an AM radio or a
+  Graham-Stetzer Meter.
+[Dirty Electricity Filters] (https://emfacademy.com/dirty-electricity-filter-guide/)
+
+### Bluetooth
+
+Bluetooth is another layered protocol nicknamed __the cable replacement protocol__ because it emulates RS232 over a
+different physical medium. Bluetooth protocol definitions describe various radios that compose the basebadn physical
+layer. The definition includes link manager protocol __LMP__ to control connections and logical link control and
+adaptation protocol __L2CAP__. Bluetooth uses LMP to establish connections between devices and L2CAP to establish a
+foundation for data transfer. Audio is listed as an __adopted protocol__, or the bits on the baseband. TCP/IP and PPP
+are adopted on top of l2CAP. TCP/IP and PPP can use Bluetooth as a physical layer.
+
+The implications of more mature versions of Bluetooth is that it makes it possible to create a 2 Mbps LAN compared to
+1Mbps. Many consumers with Bluetooth enabled laptops will find it is easy to program a bluetooth radio to send
+broadcasts and other devices to connect to connect to it as they would to a wireless LAN interface. The center
+frequency is 2.44 GHz. Bluetooth low energy __BLE__ is part of the Bluetooth protocol. BLE uses less power.
+
+[Bluetooth Specifications] (https://www.bluetooth.com/specifications/protocol-specifications/)
+
+### LoRaWAN
+
+LoRaWAN is the low power wide area networking protocol. LoRaWAN-enabled devices communicate with gateway routers to
+connect to an ethernet network. LoRaWAN networks are secured with SSL to enable secure communication. They are
+relatively new and many times the gateways require certification or registration with a regulator like the FCC.
+
+Regulation simplifies requirements for deploying devices that use radio communication. It helps to reduce interference
+and improve signal quality and safety. Some people cite frequency bands and others cite center frequency to the same
+effect. LoRa operates in the 902-928 MHz band. That band has also been used in defense applications.
+
+*LoRa* - long range on a proprietary LoRa protocol using the 902-928 MHz band
+
+*WAN* - wide area network
+
+A corporate alliance called the LoRa Alliance publishes specifications for LoRa with the intent to improve
+interoperability. The specification includes center frequencies for the EU, US, and othe regions. The 2017 LoRaWAN 1.1
+improves protocol security with new session keys and replay attack prevention. It also includes additional MAC commands
+for endpoint devices to communicate with gateways.
+
+[LoRa] (https://lora-alliance.org/resource-hub/lorawanr-specification-v103)
+
+[LoRaWAN] (https://www.thethingsnetwork.org/docs/lorawan/architecture.html)
+
+### 6LoWPAN
+
+6LoWPAN as the name suggests is LoRaWAN enabled for IPv6 for personal area networks.
+
+
+### ANT/ANT+
+
+Adaptive Network Technology, ANT and ANT+, work on the 2.4Ghz frequency.
+
+[ANT/ANT+] (https://www.thisisant.com/developer/ant-plus/ant-plus-defined/)
+
 
 ## Network tools packaged with standard operating systems
 
