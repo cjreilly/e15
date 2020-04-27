@@ -17,7 +17,8 @@ class NoteController extends Controller
                       "industry-classification" => "Industry Classification",
                       "basic-networking" => "Basic Networking",
                       "iot-protocols" => "IoT Protocols",
-                      "interoperability" => "Interoperability"];
+                      "interoperability" => "Interoperability",
+                      "frequency-allocation" => "Frequency Allocation"];
     public function home()
     {
         $title='Internet Things';
@@ -25,7 +26,8 @@ class NoteController extends Controller
             'Industry Classification',
             'Basic Networking',
             'IoT Protocols',
-            'Interoperability'
+            'Interoperability',
+            'Frequency Allocation'
         ];
         $farmData = [
             'cols'=> [

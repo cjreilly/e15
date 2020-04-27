@@ -75,6 +75,14 @@ animal behavior and farming methodologies.</i> Developing one-off solutions to s
 cat tracker into a cow tracker, can be costly and ineffective.</p>
 <h3 id="industry-classification.civil">Civil</h3>
 <h4>Transportation</h4>
+
+<figure>
+<iframe width="901" height="676" src="https://www.youtube.com/embed/4icF0ULLcuo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<figcaption>
+A more traditional description of mountain roads in the US.
+</figcaption>
+</figure>
+
 <p>Traffic control enhances safety on roadways. Embedded electronic devices are successful in creating a small
 feedback loop. Smart speed signs are one such example where drivers who are often aware of speed limits only need
 reminders to slow down.</p>
@@ -95,6 +103,15 @@ law enforcement, and pedestrians.</p>
 issues on a political agenda. However, there are many instances where flood sensors are part of early warning networks
 and weather data. Data collecting agencies can be part of the community feedback loop to empower and advance
 communities.</p>
+
+
+<figure>
+<iframe width="1132" height="637" src="https://www.youtube.com/embed/m-C1gmi1du0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<figcaption>
+An engineer demonstrates smarter roads using Libelium LoRaWAN technology.
+</figcaption>
+</figure>
+
 <h3 id="industry-classification.home">Home</h3>
 <!--
 <p class="right-floating box">
@@ -106,6 +123,12 @@ allowfullscreen></iframe>
 centuries for privileged upper-class workers. Many victorian-era houses still have remenants of where cooks and
 gardeners were supposed to serve well-to-do families. Cultural and economic transitions have made live-in service
 workers less common and moved less privileged families into more comfortable and wealthier settings.
+
+
+<figure class="left-floating box">
+<div id="all-os_combined-ww-monthly-202002-202004-map" width="600" height="400" style="width:600px; height: 400px;"></div><!-- You may change the values of width and height above to resize the chart --><p>Source: <a href="https://gs.statcounter.com/os-market-share#monthly-202002-202004-map">StatCounter Global Stats - OS Market Share</a></p><script type="text/javascript" src="https://www.statcounter.com/js/fusioncharts.js"></script><script type="text/javascript" src="https://gs.statcounter.com/chart.php?all-os_combined-ww-monthly-202002-202004-map&chartWidth=600"></script>
+<figcaption class="apa">Operating system market share map.</figcaption>
+</figure>
 <h4>Appliances</h4>
 <h4>Portable Devices</h4>
 @endsection
@@ -158,6 +181,33 @@ begins to add up to a system that must be managed, at least cooperatively by joi
 <figcamption class="apa">A logical diagram describing some basic networking concepts.</figcaption>
 </figure>
 @endsection
+
+@section('Frequency Allocation')
+<h1 id="frequency-allocation" class="title">Frequency Allocations
+@component('component.pin',['id'=>'iot-protocols'])@endcomponent
+@component('component.filter',['id'=>'iot-protocols'])@endcomponent</h1>
+
+Regulatory agencies are yet another factor in building and deploying devices.
+
+<figure class="box">
+<a href="https://www.ntia.doc.gov/files/ntia/publications/january_2016_spectrum_wall_chart.pdf">Frequency Allocation
+Wall Chart</a>
+<figcamption class="apa">A publication by the U.S. department of commerce depicting the United States Frequency
+Allocations</figcaption>
+</figure>
+
+<figure class="box">
+<a href="https://www.ntia.doc.gov/files/ntia/publications/compendium/0902.00-0928.00_01MAR14.pdf">902-928 MHz</a>
+<figcamption class="apa">A publication by the National Telecommunications and Information Administration describing the
+902-928 frequency band.</figcaption>
+</figure>
+
+<h2 class="subtitle">Who gets the frequencies?</h2>
+<p class="question"><span>Where is the line in the air and who drew it</span>Radio transmission is affected by many
+factors ranging from weather to building materials like concrete.</p>
+
+@endsection
+
 
 @section('IoT Protocols')
 <h1 id="iot-protocols" class="title">IoT Protocols
