@@ -16,7 +16,7 @@ class ConnectAuthorsAndBooks extends Migration
         Schema::table('books', function (Blueprint $table) {
             # Remove the field associated with the old way we were storing authors
             # Can do this here, or update the original migration that creates the `books` table
-            $table->dropColumn('author');
+#            $table->dropColumn('author');
             #
             # Add a new bigint field called `author_id`
             # has to be unsigned and nullable
