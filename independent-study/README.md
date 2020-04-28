@@ -5,33 +5,31 @@
 Outline:
 + Issues
 + Types of IoT
-  + Industrial
-  + Civil
-  + Home
++ Industrial
++ Civil
++ Home
 + Protocols
-  + Bluetooth
-  + BLE
-  + LoRaWAN
-  + 6LoWPAN
-  + ANT/ANT+
-  + ZigBee
-  + Z-Wave
-  + 3G & 4G
-  + 5G
-  + LTE Cat 0,1,3
-  + LTE-M1
-  + NB-Iot
-  + NFC
-  + RFID
-  + SigFox
-  + EnOcean
-  + NB-IoT
++ Bluetooth
++ BLE
++ LoRaWAN
++ 6LoWPAN
++ ANT/ANT+
++ 5G
++ LTE-M
++ NB-Iot
++ ZigBee
++ Z-Wave
++ LTE Cat 0,1,3
++ NFC
++ RFID
++ SigFox
++ EnOcean
 + Communication bands
 + Hardware
 + Basic networking
-  + Routing
-  + Switching
-  + Basic security
++ Routing
++ Switching
++ Basic security
 + Interoperability
 
 # IoT dimensions
@@ -149,10 +147,14 @@ protocol, a sequence of codes to receive and transmit on the wire, is adaptable 
 
 Many X10 devices are accomponied by in-line power filters. A power filter is an electrical filter designed specifically
 for the local voltage and frequency requirements. Hobbyists can measure frequency variations using an AM radio or a
-  Graham-Stetzer Meter.
+Graham-Stetzer Meter.
 [Dirty Electricity Filters] (https://emfacademy.com/dirty-electricity-filter-guide/)
 
 ### Bluetooth
+
+
+Center frequency: 2.44GHz
+
 
 Bluetooth is another layered protocol nicknamed __the cable replacement protocol__ because it emulates RS232 over a
 different physical medium. Bluetooth protocol definitions describe various radios that compose the basebadn physical
@@ -169,6 +171,14 @@ frequency is 2.44 GHz. Bluetooth low energy __BLE__ is part of the Bluetooth pro
 [Bluetooth Specifications] (https://www.bluetooth.com/specifications/protocol-specifications/)
 
 ### LoRaWAN
+
+
+Center frequencies: 18 channels between 865.20Mhz and 915MHz
+
+![LoRa lower channels](https://www.rfwireless-world.com/images/Lora-868-channels.jpg)
+![LoRa upper channels](https://www.rfwireless-world.com/images/Lora-900-channels.jpg)
+__LoRa channels list from RF Wireless World__
+
 
 LoRaWAN is the low power wide area networking protocol. LoRaWAN-enabled devices communicate with gateway routers to
 connect to an ethernet network. LoRaWAN networks are secured with SSL to enable secure communication. They are
@@ -198,9 +208,73 @@ for endpoint devices to communicate with gateways.
 
 ### ANT/ANT+
 
-Adaptive Network Technology, ANT and ANT+, work on the 2.4Ghz frequency.
+Center frequency: 2.46GHz
+
+Adaptive Network Technology, ANT and ANT+, uses a 2.46GHz center frequency. ANT is popularized in fitness applications
+like fitness bicycles and stride counters and home health. ANT devices can communicate on a number of short-range
+low-power network configurations. They can be public, shared between devices, or private. The combination of short
+range, descriminating configurations, and low power networks makes ANT a respectful protocol on the 2.4GHz band.
+
 
 [ANT/ANT+] (https://www.thisisant.com/developer/ant-plus/ant-plus-defined/)
+
+### 5G
+
+Center frequencies: 25.875GHz, 40.25GHz, 46.25GHz, 47.7GHz, 68.75GHz
+
+
+The 5G cell network is the next generation for wireless consumer technology. The entire frequency band considered for
+allocation is between 24GHz and 300GHz in early stages. It has a higher frequency than previous generations and hence a
+shorter transmission distance.
+
+![5G Protocol Stack](https://www.rfwireless-world.com/Tutorials/5G-network-architecture.html)
+__5G network architecture from RF Wireless World__
+
+
+The protocol stack splits the network layer and adds software defined networking capabilities. 5G networks are more
+virtualized and rely on cloud computing.
+
+5G radio towers also encorporate technology for beamforming to create narrower
+beams between towers and devices. The effect is that 5G towers can support more devices, which is important to the expected
+growth in the number of consumer devices. Higher frequency waves are affected more by factors like weather, physical
+obstructions, and distance.
+
+[Millimeter wave](https://searchnetworking.techtarget.com/definition/millimeter-wave-MM-wave)
+
+[5G frequency bands announced at WRC-19] (https://news.itu.int/wrc-19-agrees-to-identify-new-frequency-bands-for-5g/)
+
+### LTE-M
+
+Long Term Evolution 4G M, or LTE-M, a protocol for low power devices to communicate on 4G networks. Dense networks of
+LTE-M devices do not utilize much bandwidth because the maximum data rate on each device is 100 kb/s. If mobile phone
+users migrate to 5G services then 4G networks will have greater bandwidth for denser IoT device networks. LTE-M does not
+define any specific frequencies other than those defined by LTE networks. The protocl is in use to create low power wide
+area networks using existing 4G radios.
+
+
+[LTE-M described by LinkLabs](https://www.link-labs.com/blog/what-is-lte-m)
+
+
+### NB-IoT
+
+Narrowband IoT is another protocol for low power wide area networking. The protocol uses existing GSM networks. It is
+a stack of protocols consisting of 6 layers - PHY, MAC, RLC, PDCP, RRC, and NAS. The physical layer uses orthogonal
+frequency division multiple access, or OFDMA, to make more effective use of the frequency band. The MAC layer maps and
+prioritizes traffic between physical channels, logical channels, and transport channels. The Radio Link Control __RLC__ layer
+ommunication closer the way TCP/IP and UDP deliver traffic; it uses a transparent mode for voice, unacknowledged mode
+establishes communication closer the way TCP/IP and UDP deliver traffic; it uses a transparent mode for voice, unacknowledged mode
+for streaming, and acknowledged mode for data.
+
+The Packet Data Convergence Protocol __PDP__ attaches packet headers on data as it transfers information between the RLC
+layer and the IP layer. It also performs other functions to improve quality and control sequenced data delivery. The
+Radio Resource Control __RRC__ layer establishes a 3-way handshake to establish connections and transfer data.
+
+
+![NB-Iot Protocol Stack](https://www.rfwireless-world.com/images/NB-IoT-Protocol-Stack.jpg)
+
+
+[LTE-M and NB-IoT Protocols](https://www.rfwireless-world.com/Terminology/LTE-NB-IoT-Protocol-Stack.html)
+
 
 
 ## Network tools packaged with standard operating systems
