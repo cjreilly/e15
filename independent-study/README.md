@@ -279,7 +279,19 @@ Radio Resource Control __RRC__ layer establishes a 3-way handshake to establish 
 
 ## Network tools packaged with standard operating systems
 
+`ping` - test reachability and report latency
+
+`tracert` - trace the route to a destination IP address
+
 `ipconfig`/`ifconfig` - display logical interfaces, IP addresses, and network masks
+
+`netstat` - display active network connections
+
+`nslookup`/`dig` - query the DNS server to translate an IP address to a hostname or hostname to IP address
+
+`tcpdump`/`windump` - dump contents of tcp header information that arrive to the system application
+
+
 
 
 
