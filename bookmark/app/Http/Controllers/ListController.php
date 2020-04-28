@@ -46,4 +46,37 @@ class ListController extends Controller
             'flash-alert' => 'The book ' .$book->title. ' was added to your list.'
         ]);
     }
+
+    /**
+     * POST /list/{slug?}/update
+     */
+    public function update(Request $request, $slug)
+    {
+        $book = $request->user()->books()->where('slug','=',$slug)->first();
+
+        $book->pivot->notes=$request->input('notes');
+        $book->pivot->save();
+
+        # $book->save($book, ['notes' => $request->notes]);
+
+
+        return redirect('/list')->with([
+            'flash-alert' => 'Your book comments on ' .$book->title. ' are updated.'
+        ]);
+    }
+
+
+    /**
+     * POST /list/{slug?}/remove
+     */
+    public function remove(Request $request, $slug)
+    {
+        $book = $request->user()->books()->where('slug','=',$slug)->first();
+
+        $book->pivot->delete();
+
+        return redirect('/list')->with([
+            'flash-alert' => 'The book ' .$book->title. ' is removed.'
+        ]);
+    }
 }

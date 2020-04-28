@@ -23,8 +23,9 @@
                 <p>By {{ $book->author->first_name. ' ' . $book->author->last_name }}</p>
             @endif
 
-            <form method='POST' action='#'>
-                <textarea class='notes'>{{ $book->pivot->notes }}</textarea>
+            <form method='POST' action='list/{{ $book->slug }}/update'>
+                {{ csrf_field() }}
+                <textarea name='notes' class='notes'>{{ $book->pivot->notes }}</textarea>
                 <input type='submit' class='btn btn-primary' value='Update notes'>
             </form>
 
@@ -32,7 +33,7 @@
                 Added to your list {{ $book->pivot->created_at->diffForHumans() }}
             </p>
 
-           <a href='#'><i class="fa fa-minus-circle"></i> Remove from your list</a>
+           <a href='list/{{ $book->slug }}/remove'><i class="fa fa-minus-circle"></i> Remove from your list</a>
 
         </div>
         @endforeach

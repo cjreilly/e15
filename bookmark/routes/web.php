@@ -57,6 +57,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     # Process adding a book to your list
     Route::post('/list/{slug?}/add', 'ListController@save');
+
+    # Process updating a book list item
+    Route::post('/list/{slug?}/update', 'ListController@update');
+
+    # Process updating a book list item
+    Route::get('/list/{slug?}/remove', 'ListController@remove');
 });
 
 
