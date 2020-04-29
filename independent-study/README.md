@@ -78,7 +78,6 @@ twofold. First the solar cell is much less effective. And second the battery may
 The net effect is that these devices require additional planning and regulation so that they can produce better results.
 Collaboration and teamwork is important.
 
-
 ### Home
 
 
@@ -160,6 +159,7 @@ using TCP/IP.
 
 The OSI Model is also comprehensive in accomodating different protocols, including AppleTalk.
 
+
 There is a multitude of terms and concepts
 (https://www.professormesser.com/). This is only a condensed list for our purposes.
 
@@ -175,7 +175,8 @@ There is a multitude of terms and concepts
 X10 is a networked system separate from ethernet, fiber optic, and telephone communication lines. It is a standard in
 use in some systems for security and automation. X10 operates on 60Hz/120V home electrical lines. The X10 industry
 protocol, a sequence of codes to receive and transmit on the wire, is adaptable for other voltages.
-[X10Linked](https://www.x10.com/)
+
+[X10 Linked](https://www.x10.com/)
 
 Many X10 devices are accomponied by in-line power filters. A power filter is an electrical filter designed specifically
 for the local voltage and frequency requirements. Hobbyists can measure frequency variations using an AM radio or a
@@ -183,7 +184,6 @@ Graham-Stetzer Meter.
 [Dirty Electricity Filters](https://emfacademy.com/dirty-electricity-filter-guide/)
 
 ### Bluetooth
-
 
 Center frequency: 2.44GHz
 
@@ -210,7 +210,6 @@ Center frequencies: 18 channels between 865.20Mhz and 915MHz
 ![LoRa lower channels](https://www.rfwireless-world.com/images/Lora-868-channels.jpg)
 ![LoRa upper channels](https://www.rfwireless-world.com/images/Lora-900-channels.jpg)
 __LoRa channels list from RF Wireless World__
-
 
 LoRaWAN is the low power wide area networking protocol. LoRaWAN-enabled devices communicate with gateway routers to
 connect to an ethernet network. LoRaWAN networks are secured with SSL to enable secure communication. They are
@@ -259,9 +258,8 @@ The 5G cell network is the next generation for wireless consumer technology. The
 allocation is between 24GHz and 300GHz in early stages. It has a higher frequency than previous generations and hence a
 shorter transmission distance.
 
-![5G Protocol Stack]https://www.rfwireless-world.com/Tutorials/5G-network-architecture.html)
+![5G Protocol Stack](https://www.rfwireless-world.com/Tutorials/5G-network-architecture.html)
 __5G network architecture from RF Wireless World__
-
 
 The protocol stack splits the network layer and adds software defined networking capabilities. 5G networks are more
 virtualized and rely on cloud computing.
@@ -287,6 +285,7 @@ area networks using existing 4G radios.
 [LTE-M described by LinkLabs](https://www.link-labs.com/blog/what-is-lte-m)
 
 
+
 ### NB-IoT
 
 Narrowband IoT is another protocol for low power wide area networking. The protocol uses existing GSM networks. It is
@@ -306,6 +305,7 @@ Radio Resource Control __RRC__ layer establishes a 3-way handshake to establish 
 
 
 [LTE-M and NB-IoT Protocols](https://www.rfwireless-world.com/Terminology/LTE-NB-IoT-Protocol-Stack.html)
+
 
 
 
@@ -341,9 +341,19 @@ Radio Resource Control __RRC__ layer establishes a 3-way handshake to establish 
 <https://www.ciena.com/insights/articles/Tomrrows-cities-evolving-from-smart-to-adaptive.html>
 + Harnessing the Power of Feedback Loops <https://www.wired.com/2011/06/ff_feedbackloop/>
 + World's highest bridge connects Guizhou and Yunnan <https://youtu.be/RAv9lli6e2Y>
-+ Interview with Kevin Ashton
-<https://www.smart-industry.net/interview-with-iot-inventor-kevin-ashton-iot-is-driven-by-the-users>
++ Interview with Kevin Ashton <https://www.smart-industry.net/interview-with-iot-inventor-kevin-ashton-iot-is-driven-by-the-users>
 + Internet of Things Solutions and Services <https://www.cisco.com/c/en/us/solutions/internet-of-things/overview.html>
++ 7 Layers of the OSI Model <https://www.webopedia.com/quick_ref/OSI_Layers.asp>
++ X10 Linked <https://www.x10.com/>
++ Dirty Electricity Filters <https://emfacademy.com/dirty-electricity-filter-guide/>
++ Bluetooth Specifications <https://www.bluetooth.com/specifications/protocol-specifications/>
++ RF Wireless World <https://www.rfwireless-world.com>
++ LoRa Alliance <https://lora-alliance.org/resource-hub/lorawanr-specification-v103>
++ The Things Network <https://www.thethingsnetwork.org/docs/lorawan/architecture.html>
++ This is ANT <https://www.thisisant.com/developer/ant-plus/ant-plus-defined/>
++ Tech Target <https://searchnetworking.techtarget.com/definition/millimeter-wave-MM-wave>
++ ITU <https://news.itu.int/wrc-19-agrees-to-identify-new-frequency-bands-for-5g/>
++ Link Labs <https://www.link-labs.com/blog/what-is-lte-m>
 
 ## Notes for instructor
 
