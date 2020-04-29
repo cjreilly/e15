@@ -1,6 +1,5 @@
 # Independent Study
-+ By: *Christopher Reilly*
-+ Production URL: <http://independent-study.christopherreilly.me>
+By: *Christopher Reilly*
 
 Outline:
 + Issues
@@ -18,10 +17,6 @@ Outline:
 + LTE-M
 + NB-Iot
 + Basic networking
-+ Routing
-+ Switching
-+ Basic security
-+ Interoperability
 
 # IoT dimensions
 
@@ -34,8 +29,11 @@ under three primary drivers: industry, civil, and home.
 # Three primary drivers
 
 __Industry__ : collaboration between private individuals and organizations
+
 __Civil__ : public works, resources, or other works from a recognized governing body
+
 __Home__ : private places of residence and private citizens
+
 
 IoT is distinctly different from traditional cut-and-dry engineering. Rigid software development and hardware
 engineering definitions use distinct methodologies. Those methodologies succed in very specific tasks. For example,
@@ -67,7 +65,7 @@ Civil IoT is device and infrastructure management in both licensed and unlicense
 from economies of scale. A large investment in planning and construction effort is possible because of the long-term
 perceived benefits and the positive effect on many people.
 
-[Infrastructure in mountain roads] (https://youtu.be/4icF0ULLcuo)
+[Infrastructure in mountain roads](https://youtu.be/4icF0ULLcuo)
 
 Civil IoT has an additional advantage by being tied to electric grids or even functioning on microgrids. But not
 everything is as easy as putting up a sign post with an civil IoT device on top. Climate considerations are important.
@@ -75,7 +73,7 @@ For example, a solar cell might keep a battery charged on a 4G gateway to report
 But if that location is in a lowlying valley with temperatures that regularly reach 15 to 20 degrees then the damage is
 twofold. First the solar cell is much less effective. And second the battery may never charge due to low temperatures.
 
-[Libelium engineer demonstrates smart roads] (https://youtu.be/m-C1gmi1du0)
+[Libelium engineer demonstrates smart roads](https://youtu.be/m-C1gmi1du0)
 
 The net effect is that these devices require additional planning and regulation so that they can produce better results.
 Collaboration and teamwork is important.
@@ -158,7 +156,7 @@ using TCP/IP.
 | 2 | Data link (LLC) | Logical link layer; frame synchronization |
 | 1 | Physical        | Electrical and mechanical bit stream | PHY (physical) |
 
-[The 7 Layers of the OSI Model] (https://www.webopedia.com/quick_ref/OSI_Layers.asp)
+[The 7 Layers of the OSI Model](https://www.webopedia.com/quick_ref/OSI_Layers.asp)
 
 The OSI Model is also comprehensive in accomodating different protocols, including AppleTalk.
 
@@ -177,12 +175,12 @@ There is a multitude of terms and concepts
 X10 is a networked system separate from ethernet, fiber optic, and telephone communication lines. It is a standard in
 use in some systems for security and automation. X10 operates on 60Hz/120V home electrical lines. The X10 industry
 protocol, a sequence of codes to receive and transmit on the wire, is adaptable for other voltages.
-[X10Linked] (https://www.x10.com/)
+[X10Linked](https://www.x10.com/)
 
 Many X10 devices are accomponied by in-line power filters. A power filter is an electrical filter designed specifically
 for the local voltage and frequency requirements. Hobbyists can measure frequency variations using an AM radio or a
 Graham-Stetzer Meter.
-[Dirty Electricity Filters] (https://emfacademy.com/dirty-electricity-filter-guide/)
+[Dirty Electricity Filters](https://emfacademy.com/dirty-electricity-filter-guide/)
 
 ### Bluetooth
 
@@ -202,7 +200,7 @@ The implications of more mature versions of Bluetooth is that it makes it possib
 broadcasts and other devices to connect to connect to it as they would to a wireless LAN interface. The center
 frequency is 2.44 GHz. Bluetooth low energy __BLE__ is part of the Bluetooth protocol. BLE uses less power.
 
-[Bluetooth Specifications] (https://www.bluetooth.com/specifications/protocol-specifications/)
+[Bluetooth Specifications](https://www.bluetooth.com/specifications/protocol-specifications/)
 
 ### LoRaWAN
 
@@ -231,9 +229,9 @@ interoperability. The specification includes center frequencies for the EU, US, 
 improves protocol security with new session keys and replay attack prevention. It also includes additional MAC commands
 for endpoint devices to communicate with gateways.
 
-[LoRa] (https://lora-alliance.org/resource-hub/lorawanr-specification-v103)
+[LoRa](https://lora-alliance.org/resource-hub/lorawanr-specification-v103)
 
-[LoRaWAN] (https://www.thethingsnetwork.org/docs/lorawan/architecture.html)
+[LoRaWAN](https://www.thethingsnetwork.org/docs/lorawan/architecture.html)
 
 ### 6LoWPAN
 
@@ -250,7 +248,7 @@ low-power network configurations. They can be public, shared between devices, or
 range, descriminating configurations, and low power networks makes ANT a respectful protocol on the 2.4GHz band.
 
 
-[ANT/ANT+] (https://www.thisisant.com/developer/ant-plus/ant-plus-defined/)
+[ANT/ANT+](https://www.thisisant.com/developer/ant-plus/ant-plus-defined/)
 
 ### 5G
 
@@ -261,7 +259,7 @@ The 5G cell network is the next generation for wireless consumer technology. The
 allocation is between 24GHz and 300GHz in early stages. It has a higher frequency than previous generations and hence a
 shorter transmission distance.
 
-![5G Protocol Stack](https://www.rfwireless-world.com/Tutorials/5G-network-architecture.html)
+![5G Protocol Stack]https://www.rfwireless-world.com/Tutorials/5G-network-architecture.html)
 __5G network architecture from RF Wireless World__
 
 
@@ -275,7 +273,7 @@ obstructions, and distance.
 
 [Millimeter wave](https://searchnetworking.techtarget.com/definition/millimeter-wave-MM-wave)
 
-[5G frequency bands announced at WRC-19] (https://news.itu.int/wrc-19-agrees-to-identify-new-frequency-bands-for-5g/)
+[5G frequency bands announced at WRC-19](https://news.itu.int/wrc-19-agrees-to-identify-new-frequency-bands-for-5g/)
 
 ### LTE-M
 
