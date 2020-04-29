@@ -17,15 +17,6 @@ Outline:
 + 5G
 + LTE-M
 + NB-Iot
-+ ZigBee
-+ Z-Wave
-+ LTE Cat 0,1,3
-+ NFC
-+ RFID
-+ SigFox
-+ EnOcean
-+ Communication bands
-+ Hardware
 + Basic networking
 + Routing
 + Switching
@@ -62,19 +53,62 @@ system is expanded beyond a type-and-monitor setting.
 
 ### Industry
 
+Industrial IoT devices are more difficult to categorize as one would categorize things in a house. Potentially that is
+caused in part by specialized nature where they operate. Large moving metalic parts, for example, may produce electric
+fields and false messages. Similarly, stationary concrete and metal objects can block wireless transmissions.
+
+Industrial IoT may be integrated as purpose-specific solutions to large scale problems. But the gains are not lost.
+Real-time data from heavy machinery is one benefit in industrial IoT. Other gains include safety and reliability. The
+additional effort in understanding the operational environment and collaborating with stakeholders is time not lost.
 
 ### Civil
 
+Civil IoT is device and infrastructure management in both licensed and unlicensed spectrums. These devices often benefit
+from economies of scale. A large investment in planning and construction effort is possible because of the long-term
+perceived benefits and the positive effect on many people.
+
 [Infrastructure in mountain roads] (https://youtu.be/4icF0ULLcuo)
 
+Civil IoT has an additional advantage by being tied to electric grids or even functioning on microgrids. But not
+everything is as easy as putting up a sign post with an civil IoT device on top. Climate considerations are important.
+For example, a solar cell might keep a battery charged on a 4G gateway to report road conditions in a remote location.
+But if that location is in a lowlying valley with temperatures that regularly reach 15 to 20 degrees then the damage is
+twofold. First the solar cell is much less effective. And second the battery may never charge due to low temperatures.
+
 [Libelium engineer demonstrates smart roads] (https://youtu.be/m-C1gmi1du0)
+
+The net effect is that these devices require additional planning and regulation so that they can produce better results.
+Collaboration and teamwork is important.
+
 
 ### Home
 
 
+Home IoT devices are are often limited to low band and unrestricted frequencies. Most consumer home IoT devices use
+either Bluetooth or WiFi to communicate. Both offer unique benefits.
 
+Low power, low band devices that use radios like ANT/ANT+ are especially popular because of their meshing capability, short
+range, and low power. The combination of those three elements makes those devices well suited for the personal area network 
+__PAN__ classification without greatly interfering with unrelated networks. Both ANT and Bluetooth have the benefit
+of much lower administrative costs. Meshing and point-to-point communications with these devices eliminates the
+middleware and hardware from basic requirements.
 
+WiFi-enabled and wired IoT devices enable lower latency and higher bandwidth communication with remote resouces. Home
+IoT devices that utilize the 802.11 protocols are almost guaranteed to communicate with a cloud service provider for
+enhanced services. Some exceptions may be devices in __ad-hoc mode__, which communicate on wireless 802.11 protocols but do
+not require a router to communicate with end devices.
 
+Despite the specific technology implemented in the home, there is almost always a possibility to set up gateway routers
+and forward data over IP networks. Gatway routing blends local and personal area networks with broad device management
+and cloud computing benefits. Some smart IoT devices blend many different radio technologies into a single device to
+bridge the networks. Large cloud service providers commonly sell those devices as smart all-in-one home solutions
+to sell in-home services.
+
+Home IoT device manufacturers are keen to acknowledge privacy concerns. Privacy is a word with two definitions in home
+IoT. First is the lower radio performance due to clogged up airwaves and noisy interference like static on a poorly
+tuned radio. Second is the negative afterimage of careless technology spilling private information to neighbors.
+Industry and non-profit NGOs have been drivers in standardizing and enforcing solutions to both those concerns in Home
+IoT consumer devices.
 
 # Basic networking
 
@@ -292,23 +326,6 @@ Radio Resource Control __RRC__ layer establishes a 3-way handshake to establish 
 `tcpdump`/`windump` - dump contents of tcp header information that arrive to the system application
 
 
-
-
-
-This is a PHP web application that displays a set of notes. The notes are formatted and include controls to make it
-easier to reference them.
-
-The triangle character on the right-hand side of some links is a filter control.
-
-The home character in the navigation bar is a control to return to the home page.
-
-Links reference specific sections on the page. If the section is not visible the link does nothing.
-
-The web application builds the index from a JSON database.
-
-The web user can pin sections with the pin character. Pins are links to places within the site that stick to the current
-session and page context. The web user can clear pins with the clear character.
-
 ## Outside resources
 + Creating more efficient agriculture and forestry practice using IoT
 <https://futureiot.tech/creating-a-more-efficient-agriculture-and-forestry-practice-using-iot/>
@@ -329,10 +346,20 @@ session and page context. The web user can clear pins with the clear character.
 + Interview with Kevin Ashton
 <https://www.smart-industry.net/interview-with-iot-inventor-kevin-ashton-iot-is-driven-by-the-users>
 + Internet of Things Solutions and Services <https://www.cisco.com/c/en/us/solutions/internet-of-things/overview.html>
-+ Laravel Documentation <https://laravel.com/docs>
-+ PHP Common Documentation <https://www.php.net>
-+ W3 HTML Documentation <https://www.w3.org/TR/html52/>
-+ W3 CSS Documentation <https://www.w3.org/TR/css-2018/>
-+ CSCI E-15 Web Server Frameworks with Laravel/PHP <https://hesweb.dev/e15/>
 
 ## Notes for instructor
+
+This is a PHP web application that displays a set of notes. The notes are formatted and include controls to make it
+easier to reference them.
+
+The triangle character on the right-hand side of some links is a filter control.
+
+The home character in the navigation bar is a control to return to the home page.
+
+Links reference specific sections on the page. If the section is not visible the link does nothing.
+
+The web application builds the index from a JSON database.
+
+The web user can pin sections with the pin character. Pins are links to places within the site that stick to the current
+session and page context. The web user can clear pins with the clear character.
+
