@@ -202,6 +202,16 @@ frequency is 2.44 GHz. Bluetooth low energy __BLE__ is part of the Bluetooth pro
 
 [Bluetooth Specifications](https://www.bluetooth.com/specifications/protocol-specifications/)
 
+
+#### Bluetooth in practice
+
+Systems may support bluetooth access points for internet over bluetooth service. The feature depends on the level of
+hardware and software integration into the host device. The LAN networking feature may put devices on a separate network
+from WiFi devices even when they occupy the same frequency bands. In practice, Bluetooth makes use of frequency hopping
+to improve quality.
+
+
+
 ### LoRaWAN
 
 
