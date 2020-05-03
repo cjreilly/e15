@@ -13,6 +13,7 @@ use App\Server;
 
 class PathController extends Controller
 {
+    private $TEMPORARY_IDX = null;
     /**
      * GET /path/create
      * Display the form to add a new book
@@ -29,8 +30,8 @@ class PathController extends Controller
             ]);
             $validator->validate();
             if ($validator->fails()) {
-                return view('path.create')->with(['options'=>1])
-                      ->withErrors($validator, 'create');
+                return view('path.create')->with(['options'=>["all"=>1]])
+                      ->withErrors($validator, 'create')->withInput();
             }
             $serverText = $request->input('server');
             $portText = $request->input('port');
@@ -38,9 +39,6 @@ class PathController extends Controller
             $queryText = $request->input('query');
             $serverId=0;
             $portId=$portText;
-            if ($portId == 0) {
-                $portId = 80;
-            }
             $pathId=0;
             $queryId=0;
             DB::table('servers')->updateOrInsert(['server' => $serverText],
@@ -71,9 +69,51 @@ class PathController extends Controller
             $pathTagText = PathController::encodeParameterFields(
                             $serverId, $portId, $pathId, $queryId);
             return view('path.receipt')
-                    ->with(['options'=>1,'tag'=>$pathTagText]);
+                    ->with(['options'=>["all"=>1],'tag'=>$pathTagText]);
         }
-        return view('path.create')->with(['options'=>1]);
+        return view('path.create')->with(['options'=>["all"=>1]]);
+    }
+
+    private function completeDestroyValidation($validator, $reportAll=TRUE)
+    {
+        if ($validator->getData()['path'] == null)
+            return;
+
+        $tag = $validator->getData()['path'];
+        $resource = PathController::decodeParameterFields($tag);
+        $this->TEMPORARY_IDX=$resource;
+        $this->TEMPORARY_IDX['server'] = null;
+        $this->TEMPORARY_IDX['path'] = null;
+        $this->TEMPORARY_IDX['query'] = null;
+        $this->TEMPORARY_IDX['port'] = '0';
+        if ($resource['ServerIDX'] != '0') {
+            $server = Server::where('id',$resource['ServerIDX'])->first();
+            if ($server == null) {
+                $validator->errors()->add('path', 'The server record does not exist.');
+            } else {
+                $this->TEMPORARY_IDX['server'] = $server;
+            }
+        }
+        if ($resource['PathIDX'] != '0') {
+            $path = Path::where('id',$resource['PathIDX'])->first();
+            if ($path == null) {
+                if ($reportAll == TRUE) {
+                    $validator->errors()->add('path', 'The path record does not exist.');
+                }
+            } else {
+                $this->TEMPORARY_IDX['path'] = $path;
+            }
+        }
+        if ($resource['QueryIDX'] != '0') {
+            $query = Query::where('id',$resource['QueryIDX'])->first();
+            if ($query == null) {
+                if ($reportAll == TRUE) {
+                    $validator->errors()->add('path', 'The query record does not exist.');
+                }
+            } else {
+                $this->TEMPORARY_IDX['query'] = $query;
+            }
+        }
     }
 
     /**
@@ -82,45 +122,131 @@ class PathController extends Controller
      */
     public function destroy(Request $request)
     {
-        return view('path.destroy')->with(['options'=>1]);
+        if ($request->hasAny(['path']))
+        {
+            $validator = Validator::make($request->all(), [
+                    'path' => 'required|max:2048',
+            ]);
+            $validator->after(function($validator) {
+                $this::completeDestroyValidation($validator);
+            });
+            $validator->validate();
+            if ($this->TEMPORARY_IDX['server'] != null) {
+                $this->TEMPORARY_IDX['server']->delete();
+            }
+            if ($this->TEMPORARY_IDX['path'] != null) {
+                $this->TEMPORARY_IDX['path']->delete();
+            }
+            if ($this->TEMPORARY_IDX['query'] != null) {
+                $this->TEMPORARY_IDX['query']->delete();
+            }
+            if ($validator->fails()) {
+                return view('path.destroy')->with(['options'=>["all"=>1]])
+                      ->withErrors($validator, 'destroy');
+            }
+
+        }
+        return view('path.destroy')
+                  ->with(['options'=>["all"=>1]]);
+    }
+
+    private function looksLike($uri, $relation)
+    {
+        if ($relation == 'has url prefix')
+        {
+            if (strpos($uri,'://') != FALSE) {
+                return TRUE;
+            }
+            return FALSE;
+        }
+        return FALSE;
     }
 
     /**
      * POST /path/reuse
      */
-    public function reuse(Request $request, $tag=null)
+    public function reuse(Request $request, $path=null)
     {
-        if ($request->input('tag')) {
-            $tag = $request->input('tag');
+        if ($request->input('path')) {
+            $path = $request->input('path');
         }
-        if ($tag == null) {
-            return view('path.reuse')->with(['options'=>1]);
+        if ($path == null) {
+            return view('path.reuse')->with(['options'=>["execute"=>1]]);
+        } else if ($request->hasAny(['path'])) {
+            $data=$request->all();
         } else {
-            $resource = PathController::decodeParameterFields($tag);
-            $server = Server::where('id',$resource['ServerIDX'])->first();
-            $portText = $resource['Port'];
-            $path = Path::where('id',$resource['PathIDX'])->first();
-            $query = Query::where('id',$resource['QueryIDX'])->first();
-            $serverText='/';
-            $pathText='';
-            $queryText='';
-            if ($server != null) {
-                $serverText = $server->server;
-            } else {
-                return view('path.index');
-            }
-            if ($path != null) {
-                $pathText = $path->path;
-            }
-            if ($query != null) {
-                $queryText = $query->query;
-            }
-            $uri = $serverText.
-                      ($portText == '' ? '' : ':'.$portText).
-                      ($pathText == '' ? '' : '/'.$pathText).
-                      ($queryText == '' ? '' : $queryText);
-            return redirect()->away($uri);
+            $data=['path'=>$path];
         }
+        $validator = Validator::make($data, [
+                'path' => 'required|max:2048',
+        ]);
+        $validator->after(function($validator) {
+            $this::completeDestroyValidation($validator, FALSE);
+        });
+        $validator->validate();
+        if ($validator->fails()) {
+            return view('path.reuse')
+                  ->with(['options'=>["all"=>1]])
+                  ->withErrors($validator, 'reuse');
+        }
+        $serverText='';
+        $pathText='';
+        $queryText='';
+        if ($this->TEMPORARY_IDX['server'] != null) {
+            $serverText = $this->TEMPORARY_IDX['server']->server;
+        }
+        if ($this->TEMPORARY_IDX['path'] != null) {
+            $pathText = $this->TEMPORARY_IDX['path']->path;
+        }
+        if ($this->TEMPORARY_IDX['query'] != null) {
+            $queryText = $this->TEMPORARY_IDX['query']->query;
+        }
+        $portText = ($this->TEMPORARY_IDX['port'] != '0'
+                      ? $this->TEMPORARY_IDX['port']
+                      : '');
+        $ignorancePort = ($portText == "18446744073709552046" ? TRUE : FALSE);
+        $uri = $serverText.
+                  ($portText == '' || $ignorancePort==TRUE ? '' : ':'.$portText).
+                  ($pathText == '' ? '' : '/'.$pathText).
+                  ($queryText == '' ? '' : $queryText);
+
+        if ($ignorancePort ||
+            PathController::looksLike($uri, 'has url prefix') == TRUE) {
+            return redirect()->away($uri);
+        } else {
+            return redirect()->away('https://'.$uri);
+        }
+    }
+    /**
+     * POST /path/r/{id}
+     */
+    public function reuseInline(Request $request, $id=null)
+    {
+        $path=$id;
+        if ($path == null) {
+            return view('path.reuse')->with(['options'=>["execute"=>1]]);
+        } else if ($request->hasAny(['path'])) {
+            $data=$request->all();
+        } else {
+            $data=['path'=>$path];
+        }
+        $validator = Validator::make($data, [
+                'path' => 'required|max:2048',
+        ]);
+        $validator->after(function($validator) {
+            $this::completeDestroyValidation($validator, FALSE);
+        });
+        $validator->validate();
+        if ($validator->fails()) {
+            return view('path.reuse')
+                  ->with(['options'=>["all"=>1]])
+                  ->withErrors($validator, 'reuse');
+        }
+        return view('path.reuse')->with(['path'=>$id,
+                    'options'=>[
+                        "in-page-view"=>1,
+                        "reduce-form"=>1
+                    ]]);
     }
 
     /**

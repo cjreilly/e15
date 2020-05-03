@@ -7,7 +7,7 @@
 @endsection
 
 @section('quicklinks')
-    <span class="header quicklink bar"> <a href="/"> root </a></span>
+    <span class="header quicklink bar"> <a href="/"><img src="/root.png" class="icon" alt=" root "/></a></span>
 @endsection
 
 @section('quickmessage')
@@ -29,6 +29,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Internet Nodegraph Service</title>
+
+        <!-- Scripts -->
+        <script src="js/site.js"></script>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -92,21 +95,29 @@
         @yield('quicklinks')
         @yield('quickmessage')
         <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title m-b-md">
-                    @yield('blade')
-                </div>
+            <div class="content 
+                  {{ (isset($options) && is_array($options)
+                      && array_key_exists('reduce-form', $options))
+                      ? 'reduced-form'
+                      : '' }}">
+                @if (isset($options) && $options != 0
+                      && (!is_array($options) || !array_key_exists("reduce-form", $options)))
+                    <div class="title m-b-md">
+                        @yield('blade')
+                    </div>
+                @endif
                 @isset($notification)
                     @yield('notification')
                 @endisset
-                @isset($options)
-                    @if ($options != 0)
-                        <div>
-                            <span>INS Options</span>
-                            <span>@yield('options')</span>
-                        </div>
-                    @endif
-                @endisset
+                @if (isset($options) && $options != 0 && 
+                      (!is_array($options) || !array_key_exists("reduce-form", $options)))
+                    <div>
+                        <span>INS Options</span>
+                        <span>@yield('options')</span>
+                    </div>
+                @else
+                    @yield('options')
+                @endif
             </div>
         </div>
     </body>

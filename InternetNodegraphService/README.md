@@ -102,5 +102,6 @@ Request data is small enough to avoid overwhelming the system. Consider the foll
 + W3 HTML Documentation <https://www.w3.org/TR/html52/>
 + W3 CSS Documentation <https://www.w3.org/TR/css-2018/>
 + CSCI E-15 Web Server Frameworks with Laravel/PHP <https://hesweb.dev/e15/>
++ W3 How to copy with Javascript <https://www.w3schools.com/howto/howto_js_copy_clipboard.asp>
 
 ## Notes for instructor

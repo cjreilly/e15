@@ -1,5 +1,7 @@
 * {
-  * font-family: Helvetica;
+  font-family: Helvetica;
+  margin:0;
+  padding:0;
 }
 img.icon {
   max-width:2em;
@@ -61,3 +63,34 @@ src: url("/fonts/alienleaguegrad.ttf");
   font-family: "AlienLeagueGradBold";
 src: url("/fonts/alienleaguegradbold.ttf");
 }
+.icon {
+  width:2em;
+  padding:1em;
+}
+span.header {
+  height:5em;
+  display:block;
+}
+span.alert {
+  padding-top:0.5em;
+  background-color:#ffffda;
+  font-weight:bolder;
+}
+span.bar {
+  width:100%;
+}
+
+span.header.alert.bar>ul>li {
+  list-style-type:none;
+}
+
+.reduced-form,.reduced-form>iframe {
+  display:block;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  border:0;
+}
+
+
