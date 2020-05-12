@@ -14,7 +14,7 @@ class CreateServerTable extends Migration
     public function up()
     {
         Schema::create('servers', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('server',256);
             $table->dateTime('destroy_on');
         });

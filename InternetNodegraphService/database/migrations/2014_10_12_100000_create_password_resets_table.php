@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRecordDestroyTrigger extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class CreateRecordDestroyTrigger extends Migration
      */
     public function up()
     {
-        DB::raw('SET GLOBAL innodb_autoinc_lock_mode = 2');
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class CreateRecordDestroyTrigger extends Migration
      */
     public function down()
     {
-        DB::raw('SET GLOBAL innodb_autoinc_lock_mode = 0');
+        Schema::dropIfExists('password_resets');
     }
 }

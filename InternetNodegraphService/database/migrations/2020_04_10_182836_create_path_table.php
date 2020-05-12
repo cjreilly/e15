@@ -14,11 +14,10 @@ class CreatePathTable extends Migration
     public function up()
     {
         Schema::create('paths', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('path',2048);
             $table->dateTime('destroy_on');
         });
-        Schema::dropIfExists('users');
     }
 
     /**

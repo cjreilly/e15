@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Arr;
 use Str;
+use App\User;
 use App\Path;
 use App\Query;
 use App\Server;
@@ -37,6 +38,11 @@ class PathController extends Controller
             $portText = $request->input('port');
             $pathText = $request->input('path');
             $queryText = $request->input('query');
+            if (strpos($serverText, "christopherreilly.me") !== FALSE
+                || strpos($serverText, "internetnodegraphservice") !== FALSE) {
+                return view('path.create')->with(['options'=>["all"=>1]])
+                      ->withErrors($validator, 'create')->withInput();
+            }
             $serverId=0;
             $portId=$portText;
             $pathId=0;
@@ -247,6 +253,46 @@ class PathController extends Controller
                         "in-page-view"=>1,
                         "reduce-form"=>1
                     ]]);
+    }
+
+    /**
+     * GET /save/{id}
+     */
+    public function save(Request $request, $id=null)
+    {
+        $path=$id;
+        if ($path == null) {
+            return view('path.reuse')->with(['options'=>["execute"=>1]]);
+        } else if ($request->hasAny(['path'])) {
+            $data=$request->all();
+        } else {
+            $data=['path'=>$path];
+        }
+        $validator = Validator::make($data, [
+                'path' => 'required|max:2048',
+        ]);
+        $validator->after(function($validator) {
+            $this::completeDestroyValidation($validator, FALSE);
+        });
+        $validator->validate();
+        if ($validator->fails()) {
+            return view('path.reuse')
+                  ->with(['options'=>["all"=>1]])
+                  ->withErrors($validator, 'reuse');
+        }
+
+        $user = User::where('email','=',$request->user()->email)->first();
+        if ($this->TEMPORARY_IDX['path'] != null) {
+            $user->paths()->save($this->TEMPORARY_IDX['path'], ['tag'=>$id]);
+        }
+        if ($this->TEMPORARY_IDX['server'] != null) {
+            $user->servers()->save($this->TEMPORARY_IDX['server'], ['tag'=>$id]);
+        }
+        if ($this->TEMPORARY_IDX['query'] != null) {
+            $user->queries()->save($this->TEMPORARY_IDX['query'], ['tag'=>$id]);
+        }
+
+        return redirect('/');
     }
 
     /**

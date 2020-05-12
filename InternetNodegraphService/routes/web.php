@@ -14,15 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'PathController@index');
-Route::get('/{path}', 'PathController@reuse');
+Route::get('/p/{path}', 'PathController@reuse');
 Route::get('/path/create', 'PathController@create');
 Route::post('/path/create', 'PathController@create');
 Route::get('/path/destroy', 'PathController@destroy');
 Route::post('/path/destroy', 'PathController@destroy');
 Route::get('/path/reuse', 'PathController@reuse');
+Route::get('/path/save/{id}', 'PathController@save');
 Route::get('/path/r/{id}', 'PathController@reuseInline');
 
 Route::get('/debug/algo', 'PathController@showAlgo');
 Route::get('/debug/client', 'PathController@showClient');
 Route::get('/i/{option}', 'PathController@index');
 
+
+Auth::routes();
+
+Route::get('/{path}', 'PathController@reuse');

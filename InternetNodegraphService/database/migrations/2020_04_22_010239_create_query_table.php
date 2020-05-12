@@ -14,7 +14,7 @@ class CreateQueryTable extends Migration
     public function up()
     {
         Schema::create('queries', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('query',2048);
             $table->dateTime('destroy_on');
         });

@@ -7,19 +7,35 @@
 @endsection
 
 @section('quicklinks')
-    <span class="header quicklink bar"> <a href="/"><img src="/root.png" class="icon" alt=" root "/></a></span>
+    <span class="header quicklink bar">
+        <a href="/"><img src="/root.png" class="icon" alt=" root "/></a>
+        @if(Auth::user())
+            <form method='POST' id='logout' class="character" action='/logout'>
+                {{ csrf_field() }}
+                <button type='submit' class="invisible" ><img src="/logout.png" class="icon interactive character" alt=" logout "/></button>
+            </form>
+        @else
+            <a href="/login"><img src="/login.png" class="icon" alt=" login "/></a>
+        @endif
+    </span>
 @endsection
 
 @section('quickmessage')
     @if (count($errors) > 0)
-    <span class="header alert bar">
+    <span class="header alert bar" id="error-message-display">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
         </ul>
+        <button href="#" class="invisible" onClick="document.getElementById('error-message-display').remove();"><img src="/close.png"
+        class="icon interactive character" alt="  close  "/></button>
     </span>
     @endif
+@endsection
+
+
+@section('saves')
 @endsection
 
 <!DOCTYPE html>
@@ -94,7 +110,7 @@
     <body>
         @yield('quicklinks')
         @yield('quickmessage')
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center full-height">
             <div class="content 
                   {{ (isset($options) && is_array($options)
                       && array_key_exists('reduce-form', $options))
@@ -109,15 +125,21 @@
                 @isset($notification)
                     @yield('notification')
                 @endisset
-                @if (isset($options) && $options != 0 && 
-                      (!is_array($options) || !array_key_exists("reduce-form", $options)))
-                    <div>
-                        <span>INS Options</span>
-                        <span>@yield('options')</span>
-                    </div>
+                @if (Auth::user())
+                    @if (isset($options) && $options != 0
+                              && (!is_array($options) || !array_key_exists("reduce-form", $options)))
+                        <div>
+                            <span>INS Options</span>
+                            <span>@yield('options')</span>
+                        </div>
+                    @else
+                        @yield('options')
+                    @endif
                 @else
-                    @yield('options')
+                    <p>Login for options.</p>
+                    @yield('no-options')
                 @endif
+                @yield('saves')
             </div>
         </div>
     </body>
