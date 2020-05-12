@@ -11,12 +11,5 @@ class PathSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('path')->insert([
-            'tag' =>
-            rawurlencode('iot.christopherreilly.me:80/industry-classification#industry-classification.industry'),
-            'path' => 'iot.christopherreilly.me/industry-classification',
-            'query' => '#industry-classification.industry',
-            'port' => 80,
-        ]);
     }
 }

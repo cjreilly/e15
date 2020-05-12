@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('blade')
-    Index blade
+    Index
 @endsection
 
 @section('options')

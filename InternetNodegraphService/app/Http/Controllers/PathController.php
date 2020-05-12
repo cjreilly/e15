@@ -44,7 +44,7 @@ class PathController extends Controller
             DB::table('servers')->updateOrInsert(['server' => $serverText],
                       [
                           'server' => $serverText,
-                          'destroy_on' => now()->addDays(5)->toDateTimeString()
+                          'destroy_on' => now()->addDays(10)->toDateTimeString()
             ]);
             $server = Server::where('server',$serverText)->first();
             $serverId=$server->id;
@@ -52,7 +52,7 @@ class PathController extends Controller
                 DB::table('paths')->updateOrInsert(['path' => $pathText],
                           [
                               'path' => $pathText,
-                              'destroy_on' => now()->addDays(5)->toDateTimeString()
+                              'destroy_on' => now()->addDays(10)->toDateTimeString()
                 ]);
                 $path = Path::where('path',$pathText)->first();
                 $pathId=$path->id;
@@ -61,7 +61,7 @@ class PathController extends Controller
                 DB::table('queries')->updateOrInsert(['query' => $queryText],
                             [
                                 'query' => $queryText,
-                                'destroy_on' => now()->addDays(5)->toDateTimeString()
+                                'destroy_on' => now()->addDays(10)->toDateTimeString()
                 ]);
                 $query = Query::where('query',$queryText)->first();
                 $queryId=$query->id;
@@ -270,7 +270,7 @@ class PathController extends Controller
      */
     private static function normalizeParameter($parameter,$length)
     {
-        $normalizedParameter=str_pad(decbin($parameter),$length,"0",STR_PAD_LEFT);
+        $normalizedParameter=substr(str_pad(decbin($parameter),$length,"0",STR_PAD_LEFT), 0, $length);
         return $normalizedParameter;
     }
     /**
@@ -341,7 +341,7 @@ class PathController extends Controller
         {
             $integerF = PathController::parameterCharacterInteger($F);
             $binaryF = base_convert($integerF,10,2);
-            $binaryF = str_pad($binaryF,$length,"0",STR_PAD_LEFT);
+            $binaryF = substr(str_pad($binaryF,$length,"0",STR_PAD_LEFT), 0, $length);
             $parameter.="$binaryF";
         }
         return $parameter;
@@ -476,5 +476,11 @@ class PathController extends Controller
         dump("Encoded String:   ".$encodedParameterFields);
         $decodedParameterFields = PathController::decodeParameterFields($encodedParameterFields);
         dump($decodedParameterFields);
+    }
+    public function showClient(Request $request)
+    {
+        dump($_SERVER['REMOTE_ADDR'].':'.$_SERVER['REMOTE_PORT']);
+        dump($_SERVER);
+        dump($request);
     }
 }

@@ -17,6 +17,9 @@
   - a standard route with a pattern /hX4da3?sender=address-a&receiver=address-b
   - the receiver must only respond with addresses reversed
   - extra: requests have a timeout feature, which automatically destroys the request
++ Other considerations
+  - issues
+  - extra features
 
 ## PathIDX
 The PathIDX table is a cross-referenced list for all paths to exist in the system.
@@ -92,9 +95,44 @@ Request data is small enough to avoid overwhelming the system. Consider the foll
   + /path/delete/[tag]
 
 
+## Automation
+
+The automation goal set for this project is to maintain an operational development environment that can be fully
+maintained and tested by one developer. The automation goal expedites development on team environments as well by
+reducing merge conflicts. The team model is slightly more complex that what is proposed here - mostly due to increase in
+scope, especially if each developer can not wait for a full test battery to complete on each code change.
+
+### Cron maintenance
+This project implements cron jobs for maintenance in addition to automated tests. The main reason being to enhance fluid
+development. The cron jobs are intended to supplement feature and regression testing.
+
++ CronPurge - purge stale database records according to feature design. This implements the cache rotation feature.
++ CronTest - run automated dusk tests.
+
+All cron jobs rely on host system resources. They are not installed automatically. Use `crontab -e` on Linux and Mac to
+edit the system cron file. Use `tail -f storage/logs/laravel.log` to follow the log file.
+
+Here is an example job that runs Laravel jobs every minute:
+
+`
+MAILTO="CJReilly@gmail.com"
+* * * * * /bin/bash -c "cd /opt/lampp/htdocs/e15/InternetNodegraphService && /opt/lampp/bin/php artisan schedule:run >> /dev/null" 2>&1
+`
+
+## Other considerations
+
 ### Issues
  + The URL, if intercepted, is easily reproducible.
  + There is no guarantee that the proxy system can reach the destination, for example, non-public addresses.
+ + Constraint on index column when artifical limit imposed by tag algorithm is reached
+
+### Extra Features
+ + Set tag expiration instead of using the system default
+ + Update expiration date by 10 days after reuse
+ + Manual expiration update
+ + Metadata table to include use count, author
+
+
 
 ## Outside resources
 + Laravel Documentation <https://laravel.com/docs>
@@ -103,5 +141,7 @@ Request data is small enough to avoid overwhelming the system. Consider the foll
 + W3 CSS Documentation <https://www.w3.org/TR/css-2018/>
 + CSCI E-15 Web Server Frameworks with Laravel/PHP <https://hesweb.dev/e15/>
 + W3 How to copy with Javascript <https://www.w3schools.com/howto/howto_js_copy_clipboard.asp>
++ Scheduling with Cron Job <https://www.mynotepaper.com/laravel-62-task-scheduling-with-cron-job-tutorial>
++ Cron How-to <https://help.ubuntu.com/community/CronHowto>
 
 ## Notes for instructor

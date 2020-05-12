@@ -136,6 +136,11 @@ suited to perform its specialized task. Additional devices in the toast system c
 example, a register terminal for sales, a smart power system, renewable micro-grid infrastructure, network attached
 storage for backup, routers, and firewalls.
 
+### Functional separation
+
+Functional separation is important in terms of networking. Networking is an objective to connect devices and people on a
+common platform.
+
 ## Terms and concepts
 
 ### OSI Model
@@ -169,6 +174,9 @@ There is a multitude of terms and concepts
 *Bridge* - breaks up collision domains
 *Network Interface Card* - hardware extension card that implements features of the OSI model
 *Wireless Access Point* - a wireless router configured to either route or repeat traffic
+
+OSI is beneficial in describing communications because it is an open non-proprietary standard that is recognized around
+the world.
 
 ### X10
 

@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('blade')
-    Creator blade
+    Create
 @endsection
 
 @section('options')
@@ -40,9 +40,6 @@
         <br>
         <span class="option">
             <input type="submit" value="Reserve"/>
-            <span class="option label message">
-                there is no monetary exchange for demonstration purposes
-            </span>
         </span>
     </form>
 @endsection

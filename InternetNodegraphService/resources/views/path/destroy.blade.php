@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('blade')
-    Destroyer blade
+    Destroy
 @endsection
 
 @section('options')

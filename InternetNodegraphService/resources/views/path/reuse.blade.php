@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('blade')
-    Reuser blade
+    Reuse
 @endsection
 
 @section('options')

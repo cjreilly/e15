@@ -23,5 +23,6 @@ Route::get('/path/reuse', 'PathController@reuse');
 Route::get('/path/r/{id}', 'PathController@reuseInline');
 
 Route::get('/debug/algo', 'PathController@showAlgo');
+Route::get('/debug/client', 'PathController@showClient');
 Route::get('/i/{option}', 'PathController@index');
 
