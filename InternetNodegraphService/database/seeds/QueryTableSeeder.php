@@ -13,7 +13,7 @@ class QueryTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::where('email','=','proxy@ins.me')->first();
+        $user = User::where('email','=','tester@test.loc')->first();
         $homeQuery = new Query();
         $homeQuery->query = '?query';
         $homeQuery->destroy_on = now()->addDays(3650);

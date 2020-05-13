@@ -49,6 +49,7 @@ class IndexLimitTest extends DuskTestCase
         dump("Tip: use `php artisan dusk --group=all` to run all tests.");
         dump("Warning: this test may require upwards of 30 minutes to complete .");
         $this->browse(function (Browser $browser) {
+            DuskTestCase::testLogIn($browser);
             for ($i = 0; $i<262143; $i++) {
                 $this::rotateTumbler();
                 $browser->visit('/path/create')
@@ -59,6 +60,7 @@ class IndexLimitTest extends DuskTestCase
                 ->waitFor('span>a[id="ins-link"]',3)
                 ->assertPresent('span>[id="ins-link"]');
             }
+            DuskTestCase::testLogOut($browser);
         });
     }
 }

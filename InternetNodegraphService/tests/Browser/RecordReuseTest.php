@@ -18,6 +18,7 @@ class RecordReuseTest extends DuskTestCase
     public function testReuseByForm()
     {
         $this->browse(function (Browser $browser) {
+                DuskTestCase::testLogIn($browser);
                 $browser->visit('/')
                 ->waitFor('div.title',3)
                 ->assertSee('Index')
@@ -25,7 +26,7 @@ class RecordReuseTest extends DuskTestCase
                 ->click('span>a[href="/path/create"]')
                 ->assertSee('Create')
                 ->assertSee('server')
-                ->value('input[id="server"]', "http://internetnodegraphservice.loc")
+                ->value('input[id="server"]', "http://localhost")
                 ->press('Reserve')
                 ->assertPresent('span>a[id="ins-link"]');
                 $tag = $browser->text('span>a[id="ins-link"]');
@@ -36,8 +37,9 @@ class RecordReuseTest extends DuskTestCase
                 ->assertSee('Reuse')
                 ->type('input[id="path"]', $tag)
                 ->press('Execute')
-                ->waitFor('div.title',3)
-                ->assertSee('Index');
+                ->assertDontSee('Index');
+                $browser->back();
+                DuskTestCase::testLogOut($browser);
         });
     }
     /**
@@ -50,6 +52,7 @@ class RecordReuseTest extends DuskTestCase
     public function testReuseByLink()
     {
         $this->browse(function (Browser $browser) {
+               DuskTestCase::testLogIn($browser);
                 $browser->visit('/')
                 ->waitFor('div.title',3)
                 ->assertSee('Index')
@@ -57,13 +60,14 @@ class RecordReuseTest extends DuskTestCase
                 ->click('span>a[href="/path/create"]')
                 ->assertSee('Create')
                 ->assertSee('server')
-                ->value('input[id="server"]', "http://internetnodegraphservice.loc")
+                ->value('input[id="server"]', "http://localhost")
                 ->press('Reserve')
                 ->assertPresent('span>a[id="ins-link"]');
                 $tag = $browser->text('span>a[id="ins-link"]');
                 $browser->click('span>a[id="ins-link"]')
-                ->waitFor('div.title',3)
-                ->assertSee('Index');
+                ->assertDontSee('Index');
+                $browser->back();
+                DuskTestCase::testLogOut($browser);
         });
     }
 }

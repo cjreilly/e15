@@ -18,6 +18,7 @@ class RecordDestroyTest extends DuskTestCase
     public function testCreateAndDestroyWithHost()
     {
         $this->browse(function (Browser $browser) {
+                DuskTestCase::testLogIn($browser);
                 $browser->visit('/')
                 ->waitFor('div.title',3)
                 ->assertSee('Index')
@@ -38,6 +39,7 @@ class RecordDestroyTest extends DuskTestCase
                 ->press('Remove')
                 ->assertSee('Destroy')
                 ->assertDontSee('The server record does not exist');
+                DuskTestCase::testLogOut($browser);
         });
     }
 }

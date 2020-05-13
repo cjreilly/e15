@@ -18,6 +18,7 @@ class RecordCreateTest extends DuskTestCase
     public function testCreateWithHost()
     {
         $this->browse(function (Browser $browser) {
+                DuskTestCase::testLogIn($browser);
                 $browser->visit('/')
                 ->waitFor('div.title',3)
                 ->assertSee('Index')
@@ -29,6 +30,7 @@ class RecordCreateTest extends DuskTestCase
                 ->press('Reserve')
                 ->waitFor('span>a[id="ins-link"]')
                 ->assertPresent('span>[id="ins-link"]');
+                DuskTestCase::testLogOut($browser);
                 });
     }
     /**
@@ -41,6 +43,7 @@ class RecordCreateTest extends DuskTestCase
     public function testCreateWithHostPortPathQuery()
     {
         $this->browse(function (Browser $browser) {
+                DuskTestCase::testLogIn($browser);
                 $browser->visit('/')
                 ->waitFor('div.title',3)
                 ->assertSee('Index')
@@ -57,6 +60,7 @@ class RecordCreateTest extends DuskTestCase
                 ->value('input[id="query"]', "serverquery")
                 ->press('Reserve')
                 ->assertPresent('span>a[id="ins-link"]');
+                DuskTestCase::testLogOut($browser);
                 });
     }
     /**
@@ -69,6 +73,7 @@ class RecordCreateTest extends DuskTestCase
     public function testCreateWithNoInput()
     {
         $this->browse(function (Browser $browser) {
+                DuskTestCase::testLogIn($browser);
                 $browser->visit('/')
                 ->waitFor('div.title',3)
                 ->assertSee('Index')
@@ -80,7 +85,9 @@ class RecordCreateTest extends DuskTestCase
                 ->assertSee('path')
                 ->assertSee('query')
                 ->press('Reserve')
-                ->assertSee('The server field is required.');
+                ->assertSee('The server field is required.')
+                ->press('button [alt="  close  "]');
+                DuskTestCase::testLogOut($browser);
                 });
     }
 }

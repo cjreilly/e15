@@ -15,6 +15,18 @@ use App\Server;
 class PathController extends Controller
 {
     private $TEMPORARY_IDX = null;
+
+    private function completeCreateValidation($validator, $reportAll=TRUE)
+    {
+        if ($validator->getData()['server'] == null)
+            return;
+
+        $serverText = $validator->getData()['server'];
+        if (strpos($serverText, "christopherreilly.me") !== FALSE
+                || strpos($serverText, "internetnodegraphservice") !== FALSE) {
+            $validator->errors()->add('server', 'Unable to use that server.');
+        }
+    }
     /**
      * GET /path/create
      * Display the form to add a new book
@@ -29,53 +41,52 @@ class PathController extends Controller
                     'path' => 'nullable|max:2048',
                     'query' => 'nullable|max:2048'
             ]);
+            $validator->after(function($validator) {
+                    $this::completeCreateValidation($validator);
+                    });
             $validator->validate();
             if ($validator->fails()) {
                 return view('path.create')->with(['options'=>["all"=>1]])
-                      ->withErrors($validator, 'create')->withInput();
+                    ->withErrors($validator, 'create')->withInput();
             }
             $serverText = $request->input('server');
             $portText = $request->input('port');
             $pathText = $request->input('path');
             $queryText = $request->input('query');
-            if (strpos($serverText, "christopherreilly.me") !== FALSE
-                || strpos($serverText, "internetnodegraphservice") !== FALSE) {
-                return view('path.create')->with(['options'=>["all"=>1]])
-                      ->withErrors($validator, 'create')->withInput();
-            }
+
             $serverId=0;
             $portId=$portText;
             $pathId=0;
             $queryId=0;
             DB::table('servers')->updateOrInsert(['server' => $serverText],
-                      [
-                          'server' => $serverText,
-                          'destroy_on' => now()->addDays(10)->toDateTimeString()
-            ]);
+                    [
+                    'server' => $serverText,
+                    'destroy_on' => now()->addDays(10)->toDateTimeString()
+                    ]);
             $server = Server::where('server',$serverText)->first();
             $serverId=$server->id;
             if ($pathText != null) {
                 DB::table('paths')->updateOrInsert(['path' => $pathText],
-                          [
-                              'path' => $pathText,
-                              'destroy_on' => now()->addDays(10)->toDateTimeString()
-                ]);
+                        [
+                        'path' => $pathText,
+                        'destroy_on' => now()->addDays(10)->toDateTimeString()
+                        ]);
                 $path = Path::where('path',$pathText)->first();
                 $pathId=$path->id;
             }
             if ($queryText != null) {
                 DB::table('queries')->updateOrInsert(['query' => $queryText],
-                            [
-                                'query' => $queryText,
-                                'destroy_on' => now()->addDays(10)->toDateTimeString()
-                ]);
+                        [
+                        'query' => $queryText,
+                        'destroy_on' => now()->addDays(10)->toDateTimeString()
+                        ]);
                 $query = Query::where('query',$queryText)->first();
                 $queryId=$query->id;
             }
             $pathTagText = PathController::encodeParameterFields(
-                            $serverId, $portId, $pathId, $queryId);
+                    $serverId, $portId, $pathId, $queryId);
             return view('path.receipt')
-                    ->with(['options'=>["all"=>1],'tag'=>$pathTagText]);
+                ->with(['options'=>["all"=>1],'tag'=>$pathTagText]);
         }
         return view('path.create')->with(['options'=>["all"=>1]]);
     }
@@ -134,8 +145,8 @@ class PathController extends Controller
                     'path' => 'required|max:2048',
             ]);
             $validator->after(function($validator) {
-                $this::completeDestroyValidation($validator);
-            });
+                    $this::completeDestroyValidation($validator);
+                    });
             $validator->validate();
             if ($this->TEMPORARY_IDX['server'] != null) {
                 $this->TEMPORARY_IDX['server']->delete();
@@ -148,12 +159,12 @@ class PathController extends Controller
             }
             if ($validator->fails()) {
                 return view('path.destroy')->with(['options'=>["all"=>1]])
-                      ->withErrors($validator, 'destroy');
+                    ->withErrors($validator, 'destroy');
             }
 
         }
         return view('path.destroy')
-                  ->with(['options'=>["all"=>1]]);
+            ->with(['options'=>["all"=>1]]);
     }
 
     private function looksLike($uri, $relation)
@@ -162,8 +173,8 @@ class PathController extends Controller
         {
             if (strpos($uri,'://') != FALSE) {
                 return TRUE;
-            }
-            return FALSE;
+        }
+        return FALSE;
         }
         return FALSE;
     }
@@ -187,13 +198,13 @@ class PathController extends Controller
                 'path' => 'required|max:2048',
         ]);
         $validator->after(function($validator) {
-            $this::completeDestroyValidation($validator, FALSE);
-        });
+                $this::completeDestroyValidation($validator, FALSE);
+                });
         $validator->validate();
         if ($validator->fails()) {
             return view('path.reuse')
-                  ->with(['options'=>["all"=>1]])
-                  ->withErrors($validator, 'reuse');
+                ->with(['options'=>["all"=>1]])
+                ->withErrors($validator, 'reuse');
         }
         $serverText='';
         $pathText='';
@@ -208,16 +219,16 @@ class PathController extends Controller
             $queryText = $this->TEMPORARY_IDX['query']->query;
         }
         $portText = ($this->TEMPORARY_IDX['port'] != '0'
-                      ? $this->TEMPORARY_IDX['port']
-                      : '');
+                ? $this->TEMPORARY_IDX['port']
+                : '');
         $ignorancePort = ($portText == "18446744073709552046" ? TRUE : FALSE);
         $uri = $serverText.
-                  ($portText == '' || $ignorancePort==TRUE ? '' : ':'.$portText).
-                  ($pathText == '' ? '' : '/'.$pathText).
-                  ($queryText == '' ? '' : $queryText);
+            ($portText == '' || $ignorancePort==TRUE ? '' : ':'.$portText).
+            ($pathText == '' ? '' : '/'.$pathText).
+            ($queryText == '' ? '' : $queryText);
 
         if ($ignorancePort ||
-            PathController::looksLike($uri, 'has url prefix') == TRUE) {
+                PathController::looksLike($uri, 'has url prefix') == TRUE) {
             return redirect()->away($uri);
         } else {
             return redirect()->away('https://'.$uri);
@@ -240,19 +251,19 @@ class PathController extends Controller
                 'path' => 'required|max:2048',
         ]);
         $validator->after(function($validator) {
-            $this::completeDestroyValidation($validator, FALSE);
-        });
+                $this::completeDestroyValidation($validator, FALSE);
+                });
         $validator->validate();
         if ($validator->fails()) {
             return view('path.reuse')
-                  ->with(['options'=>["all"=>1]])
-                  ->withErrors($validator, 'reuse');
+                ->with(['options'=>["all"=>1]])
+                ->withErrors($validator, 'reuse');
         }
         return view('path.reuse')->with(['path'=>$id,
-                    'options'=>[
-                        "in-page-view"=>1,
-                        "reduce-form"=>1
-                    ]]);
+                'options'=>[
+                "in-page-view"=>1,
+                "reduce-form"=>1
+                ]]);
     }
 
     /**
@@ -272,13 +283,13 @@ class PathController extends Controller
                 'path' => 'required|max:2048',
         ]);
         $validator->after(function($validator) {
-            $this::completeDestroyValidation($validator, FALSE);
-        });
+                $this::completeDestroyValidation($validator, FALSE);
+                });
         $validator->validate();
         if ($validator->fails()) {
             return view('path.reuse')
-                  ->with(['options'=>["all"=>1]])
-                  ->withErrors($validator, 'reuse');
+                ->with(['options'=>["all"=>1]])
+                ->withErrors($validator, 'reuse');
         }
 
         $user = User::where('email','=',$request->user()->email)->first();

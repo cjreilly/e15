@@ -13,15 +13,15 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $homeUser = new User();
-        $homeUser->name = 'proxy';
-        $homeUser->email = 'proxy@ins.me';
-        $homeUser->password = hash('sha256', 'superduper');
+        $homeUser->name = 'test';
+        $homeUser->email = 'tester@test.loc';
+        $homeUser->password = bcrypt($password='superduper');
         $homeUser->save();
 
         $otherUser = new User();
         $otherUser->name = 'other';
         $otherUser->email = 'other@ins.me';
-        $otherUser->password = hash('sha256', 'superduper');
+        $otherUser->password = bcrypt($password='superduper');
         $otherUser->save();
     }
 }

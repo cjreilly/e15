@@ -136,7 +136,7 @@
                         @yield('options')
                     @endif
                 @else
-                    <p>Login for options.</p>
+                    <p>Log in for options.</p>
                     @yield('no-options')
                 @endif
                 @yield('saves')

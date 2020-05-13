@@ -40,4 +40,24 @@ abstract class DuskTestCase extends BaseTestCase
             )
         );
     }
+
+    /**
+     * Test log in.
+     */
+    protected static function testLogIn($browser)
+    {
+        $browser->visit('/');
+        $browser->waitFor('a [alt=" login "]', 3)
+                ->click('a [alt=" login "]')
+                ->waitFor('div.content', 3)
+                ->value('input[id="email"]', 'tester@test.loc')
+                ->value('input[id="password"]', 'superduper')
+                ->press('Login');
+    }
+
+    protected static function testLogOut($browser)
+    {
+        $browser->waitFor('button [alt=" logout "]', 3)
+                ->click('button [alt=" logout "]');
+    }
 }

@@ -15,14 +15,12 @@ class HomeTest extends DuskTestCase
      * @group foundational
      * @return void
      */
-    public function testExample()
+    public function testFirstVisit()
     {
         $this->browse(function (Browser $browser) {
                 $browser->visit('/')
                 ->assertSee('Index')
-                ->assertSee('Proxy Designer')
-                ->assertSee('Deconstructor')
-                ->assertSee('Request Executor')
+                ->assertSee('Log in for options')
                 ->click('a [alt=" root "]')
                 ->waitFor('div.title',3)
                 ->assertSee('Index');
@@ -39,6 +37,7 @@ class HomeTest extends DuskTestCase
     public function testHomeLinks()
     {
         $this->browse(function (Browser $browser) {
+                DuskTestCase::testLogIn($browser);
                 $browser->visit('/')
                 ->waitFor('div.title',3)
                 ->assertSee('Index')
@@ -56,6 +55,7 @@ class HomeTest extends DuskTestCase
                 ->click('a [alt=" root "]')
                 ->waitFor('div.title',3)
                 ->assertSee('Index');
+                DuskTestCase::testLogOut($browser);
                 });
     }
 }
