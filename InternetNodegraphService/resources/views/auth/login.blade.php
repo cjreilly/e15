@@ -17,10 +17,6 @@
       <label for='password'>Password</label>
       <input id='password' type='password' name='password' required>
 
-      <label>
-          <input type='checkbox' name='remember' {{ old('remember') ? 'checked' : '' }}>
-          remember
-      </label>
       </p>
 
       <p>
